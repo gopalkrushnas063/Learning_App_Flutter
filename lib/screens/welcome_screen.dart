@@ -32,7 +32,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   child: Container(
                     child: Image.asset(
-                      "images/books.png",
+                      "assets/images/books.png",
                       scale: 0.8,
                     ),
                   ),
