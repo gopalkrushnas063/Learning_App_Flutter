@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
 
+  //Creating static data in lists
+  List catNames = [
+    'Category',
+    'Classes',
+    'Free Courses',
+    'Book Store',
+    'Live Courses',
+    'Leader Board'
+  ];
+
+  List<Color> catColors = [];
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,6 +94,28 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              top: 20,
+              left: 15,
+              right: 15,
+            ),
+            child: Column(
+              children: [
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 1.1,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Column();
+                  },
                 ),
               ],
             ),
