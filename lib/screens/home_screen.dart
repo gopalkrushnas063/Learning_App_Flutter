@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
     Color(0xFFFC7F7F),
     Color(0xFFC084FB),
     Color(0xFF78E667),
-  ]; //16:32
+  ];
 
   List<Icon> catIcons = [
     Icon(Icons.category, color: Colors.white, size: 30),
@@ -27,6 +27,13 @@ class HomePage extends StatelessWidget {
     Icon(Icons.store, color: Colors.white, size: 30),
     Icon(Icons.play_circle_fill, color: Colors.white, size: 30),
     Icon(Icons.emoji_events, color: Colors.white, size: 30),
+  ];
+
+  List imgList = [
+    'Flutter',
+    'React Native',
+    'Python',
+     'C#',
   ];
 
   @override
@@ -156,9 +163,37 @@ class HomePage extends StatelessWidget {
                   },
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    
+                    Text(
+                      "Courses",
+                      style: TextStyle(
+                        fontSize: 23,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      "See All",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF674AEF),
+                      ),
+                    ),
                   ],
+                ),
+                SizedBox(height: 10),
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio:
+                        (MediaQuery.of(context).size.height - 50 - 25) /
+                            (4 * 240),
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                  ),
                 ),
               ],
             ),
