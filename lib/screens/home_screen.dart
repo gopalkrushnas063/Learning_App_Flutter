@@ -217,7 +217,7 @@ class HomePage extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.all(10),
                               child: Image.asset(
-                                "images/${imgList[index]}.png",
+                                "assets/images/${imgList[index]}.png",
                                 width: 100,
                                 height: 100,
                               ),
@@ -249,6 +249,21 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: true,
+        iconSize: 32,
+        selectedItemColor: Color(0xFF674AEF),
+        selectedFontSize: 18,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.assignment), label: 'Courses'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: 'Wishlist'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
         ],
       ),
     );
