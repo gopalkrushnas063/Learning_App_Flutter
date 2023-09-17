@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-
   //Creating static data in lists
   List catNames = [
     'Category',
@@ -12,9 +11,24 @@ class HomePage extends StatelessWidget {
     'Leader Board'
   ];
 
-  List<Color> catColors = [];
+  List<Color> catColors = [
+    Color(0xFFFFCF2F),
+    Color(0xFF6FE08D),
+    Color(0xFF618DFD),
+    Color(0xFFFC7F7F),
+    Color(0xFFC084FB),
+    Color(0xFF78E667),
+  ]; //16:32
 
-  
+  List<Icon> catIcons = [
+    Icon(Icons.category,color: Colors.white, size: 30),
+    Icon(Icons.video_library,color: Colors.white, size: 30),
+    Icon(Icons.assignment,color: Colors.white, size: 30),
+    Icon(Icons.store,color: Colors.white, size: 30),
+    Icon(Icons.play_circle_fill,color: Colors.white, size: 30),
+    Icon(Icons.emoji_events,color: Colors.white, size: 30),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
