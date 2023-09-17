@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/screens/course_screen.dart';
 
 class HomePage extends StatelessWidget {
   //Creating static data in lists
@@ -204,7 +205,14 @@ class HomePage extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) {
                     return InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  CourseScreen(imgList[index])),
+                        );
+                      },
                       child: Container(
                         padding:
                             EdgeInsets.symmetric(vertical: 20, horizontal: 10),
