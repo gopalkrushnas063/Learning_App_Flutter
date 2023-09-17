@@ -21,12 +21,12 @@ class HomePage extends StatelessWidget {
   ]; //16:32
 
   List<Icon> catIcons = [
-    Icon(Icons.category,color: Colors.white, size: 30),
-    Icon(Icons.video_library,color: Colors.white, size: 30),
-    Icon(Icons.assignment,color: Colors.white, size: 30),
-    Icon(Icons.store,color: Colors.white, size: 30),
-    Icon(Icons.play_circle_fill,color: Colors.white, size: 30),
-    Icon(Icons.emoji_events,color: Colors.white, size: 30),
+    Icon(Icons.category, color: Colors.white, size: 30),
+    Icon(Icons.video_library, color: Colors.white, size: 30),
+    Icon(Icons.assignment, color: Colors.white, size: 30),
+    Icon(Icons.store, color: Colors.white, size: 30),
+    Icon(Icons.play_circle_fill, color: Colors.white, size: 30),
+    Icon(Icons.emoji_events, color: Colors.white, size: 30),
   ];
 
   @override
@@ -121,6 +121,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               children: [
                 GridView.builder(
+                  itemCount: catNames.length,
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -128,8 +129,36 @@ class HomePage extends StatelessWidget {
                     childAspectRatio: 1.1,
                   ),
                   itemBuilder: (context, index) {
-                    return Column();
+                    return Column(
+                      children: [
+                        Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: catColors[index],
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: catIcons[index],
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          catNames[index],
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black.withOpacity(0.7),
+                          ),
+                        ),
+                      ],
+                    );
                   },
+                ),
+                Row(
+                  children: [
+                    
+                  ],
                 ),
               ],
             ),
