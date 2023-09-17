@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/widgets/description_section.dart';
+import 'package:learning_app/widgets/video_section.dart';
 
 class CourseScreen extends StatefulWidget {
   String img;
