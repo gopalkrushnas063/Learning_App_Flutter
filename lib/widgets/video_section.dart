@@ -30,6 +30,10 @@ class VideoSection extends StatelessWidget {
               size: 30,
             ),
           ),
+          title: Text(
+            videoList[index],
+          ),
+          subtitle: Text("20 min 50 sec"),
         );
       },
     );
