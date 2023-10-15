@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/screens/courses/all_courses_page.dart';
 import 'package:learning_app/screens/courses/course_screen.dart';
 
 class CoursesGrid extends StatelessWidget {
@@ -37,6 +38,7 @@ class CoursesGrid extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 color: Color(0xFF674AEF),
               ),
+              
             ),
           ],
         ),

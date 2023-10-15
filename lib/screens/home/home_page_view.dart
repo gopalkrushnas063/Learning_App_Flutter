@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/screens/home/category_gridview.dart';
-import 'package:learning_app/screens/home/courses_gridview.dart';
+import 'package:learning_app/screens/courses/courses_gridview.dart';
 import 'package:learning_app/screens/home/custom_appbar.dart';
 
 
