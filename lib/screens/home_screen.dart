@@ -6,8 +6,8 @@ class HomePage extends StatelessWidget {
   List catNames = [
     'Category',
     'Classes',
-    'Free Courses',
-    'Book Store',
+    'Courses',
+    'E-Book Store',
     'Live Courses',
     'Leader Board'
   ];
@@ -88,7 +88,7 @@ class HomePage extends StatelessWidget {
                     bottom: 15,
                   ),
                   child: Text(
-                    "Hi Programmer",
+                    "Hi Learner",
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
