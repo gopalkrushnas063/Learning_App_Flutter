@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learning_app/screens/home_screen.dart';
+import 'package:learning_app/screens/home/home_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -25,7 +25,7 @@ class WelcomeScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height / 1.6,
                   decoration: BoxDecoration(
-                    color: Color(0xFF674AEF),
+                    color: Colors.lightGreen,
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(70),
                     ),
@@ -45,7 +45,7 @@ class WelcomeScreen extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height / 2.666,
                 decoration: BoxDecoration(
-                  color: Color(0xFF674AEF),
+                  color: Colors.lightGreen,
                 ),
               ),
             ),
@@ -86,7 +86,7 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 60),
                     Material(
-                      color: Color(0xFF674AEF),
+                      color: Colors.lightGreen,
                       borderRadius: BorderRadius.circular(10),
                       child: InkWell(
                         onTap: () {
