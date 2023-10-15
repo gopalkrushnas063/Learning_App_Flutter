@@ -103,6 +103,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: _pages[_currentIndex], // Display the current page based on index
       bottomNavigationBar: BottomNavigationBar(

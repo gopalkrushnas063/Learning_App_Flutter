@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learning_app/screens/courses/all_courses_page.dart';
 import 'package:learning_app/screens/courses/course_screen.dart';
 
 class CoursesGrid extends StatelessWidget {
@@ -19,6 +18,9 @@ class CoursesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double gridItemWidth = MediaQuery.of(context).size.width / 2 - 15; // Adjust the width based on screen size
+    double gridItemHeight = gridItemWidth * 1.4; // Maintain the same aspect ratio
+
     return Column(
       children: [
         Row(
@@ -38,7 +40,6 @@ class CoursesGrid extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 color: Color(0xFF674AEF),
               ),
-              
             ),
           ],
         ),
@@ -50,8 +51,7 @@ class CoursesGrid extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio:
-                  (MediaQuery.of(context).size.height - 50 - 25) / (4 * 240),
+              childAspectRatio: gridItemWidth / gridItemHeight,
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
             ),
@@ -65,6 +65,8 @@ class CoursesGrid extends StatelessWidget {
                   );
                 },
                 child: Container(
+                  width: gridItemWidth,
+                  height: gridItemHeight,
                   padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
