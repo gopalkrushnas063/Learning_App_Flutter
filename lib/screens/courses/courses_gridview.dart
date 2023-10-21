@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learning_app/screens/courses/all_courses_page.dart';
 import 'package:learning_app/screens/courses/course_screen.dart';
 
 class CoursesGrid extends StatelessWidget {

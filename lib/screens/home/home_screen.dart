@@ -1,83 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:learning_app/screens/home/category_gridview.dart';
-// import 'package:learning_app/screens/home/courses_gridview.dart';
-// import 'package:learning_app/screens/home/custom_appbar.dart';
-
-// class HomePage extends StatefulWidget {
-//   @override
-//   State<HomePage> createState() => _HomePageState();
-// }
-
-// class _HomePageState extends State<HomePage> {
-//   int _currentIndex = 0;
-
-//   void onTabTapped(int index) {
-//     setState(() {
-//       _currentIndex = index;
-//     });
-
-//     switch (index) {
-//       case 0:
-//         // Do nothing, you are already on the home page.
-//         break;
-//       case 1:
-//         Navigator.of(context).pushNamed('/course');
-//         break;
-//       case 2:
-//         Navigator.of(context).pushNamed('/wishlist');
-//         break;
-//       case 3:
-//         Navigator.of(context).pushNamed('/account');
-//         break;
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: ListView(
-//         children: [
-//           CustomAppBar(),
-//           SingleChildScrollView(
-//             child: Padding(
-//               padding: EdgeInsets.only(
-//                 top: 20,
-//                 left: 15,
-//                 right: 15,
-//               ),
-//               child: Column(
-//                 children: [
-//                   CategoryGrid(),
-//                   CoursesGrid(),
-//                 ],
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//       bottomNavigationBar: BottomNavigationBar(
-//         currentIndex: _currentIndex,
-//         onTap: onTabTapped,
-//         showUnselectedLabels: true,
-//         iconSize: 32,
-//         selectedItemColor: Colors.lightGreen,
-//         selectedFontSize: 18,
-//         unselectedItemColor: Colors.grey,
-//         items: [
-//           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-//           BottomNavigationBarItem(icon: Icon(Icons.assignment), label: 'Courses'),
-//           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Wishlist'),
-//           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:learning_app/screens/account/account_section.dart';
 import 'package:learning_app/screens/courses/all_courses_page.dart';
@@ -85,7 +5,7 @@ import 'package:learning_app/screens/home/home_page_view.dart';
 import 'package:learning_app/screens/wishlist/wish_list_screen.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -104,12 +24,46 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex], // Display the current page based on index
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.lightGreen,
+        toolbarHeight: 60,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notifications,color: Colors.white,),
+            onPressed: () {
+              // Handle the notification icon click here.
+            },
+          ),
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            ListTile(
+              title: Text('Menu Item 1'),
+              onTap: () {
+                // Handle menu item 1 click here.
+              },
+            ),
+            ListTile(
+              title: Text('Menu Item 2'),
+              onTap: () {
+                // Handle menu item 2 click here.
+              },
+            ),
+            // Add more menu items as needed.
+          ],
+        ),
+      ),
+      body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (int index) {
           setState(() {
-            _currentIndex = index; // Change the current index when a tab is tapped
+            _currentIndex = index;
           });
         },
         showUnselectedLabels: true,

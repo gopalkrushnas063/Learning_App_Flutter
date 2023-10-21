@@ -9,7 +9,7 @@ class WelcomeScreen extends StatelessWidget {
     return Material(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height*0.3,
         child: Stack(
           children: [
             Stack(
@@ -61,60 +61,62 @@ class WelcomeScreen extends StatelessWidget {
                     topLeft: Radius.circular(70),
                   ),
                 ),
-                child: Column(
-                  children: [
-                    Text(
-                      "Learning is Everything",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1,
-                        wordSpacing: 2,
-                      ),
-                    ),
-                    SizedBox(height: 15),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40),
-                      child: Text(
-                        'Learning with Pleasure with Dear Programmer, Whenever you are.',
-                        textAlign: TextAlign.center,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Text(
+                        "Learning is Everything",
                         style: TextStyle(
-                          fontSize: 17,
-                          color: Colors.black.withOpacity(0.6),
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1,
+                          wordSpacing: 2,
                         ),
                       ),
-                    ),
-                    SizedBox(height: 60),
-                    Material(
-                      color: Colors.lightGreen,
-                      borderRadius: BorderRadius.circular(10),
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePage(),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 15,
-                            horizontal: 80,
-                          ),
-                          child: Text(
-                            "Get Start",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1,
-                            ),
+                      SizedBox(height: 15),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 40),
+                        child: Text(
+                          'Learning with Pleasure with Dear Programmer, Whenever you are.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 17,
+                            color: Colors.black.withOpacity(0.6),
                           ),
                         ),
                       ),
-                    )
-                  ],
+                      SizedBox(height: 60),
+                      Material(
+                        color: Colors.lightGreen,
+                        borderRadius: BorderRadius.circular(10),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 15,
+                              horizontal: 80,
+                            ),
+                            child: Text(
+                              "Get Start",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+  late final GlobalKey<ScaffoldState> scaffoldKey;
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +22,6 @@ class CustomAppBar extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(
-                Icons.dashboard,
-                size: 30,
-                color: Colors.white,
-              ),
-              Icon(
-                Icons.notifications,
-                size: 30,
-                color: Colors.white,
-              )
-            ],
-          ),
-          SizedBox(height: 20),
           Padding(
             padding: EdgeInsets.only(
               left: 3,
