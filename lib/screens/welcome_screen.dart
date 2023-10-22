@@ -2,28 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/screens/home/home_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height*0.3,
-        child: Stack(
-          children: [
-            Stack(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Container(
+            width: constraints.maxWidth,
+            height: constraints.maxHeight,
+            child: Stack(
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 1.6,
+                  width: constraints.maxWidth,
+                  height: constraints.maxHeight / 1.6,
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
                 ),
                 Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 1.6,
+                  width: constraints.maxWidth,
+                  height: constraints.maxHeight / 1.6,
                   decoration: BoxDecoration(
                     color: Colors.lightGreen,
                     borderRadius: BorderRadius.only(
@@ -37,91 +36,94 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    width: constraints.maxWidth,
+                    height: constraints.maxHeight / 2.666,
+                    decoration: BoxDecoration(
+                      color: Colors.lightGreen,
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    width: constraints.maxWidth,
+                    height: constraints.maxHeight / 2.666,
+                    padding: EdgeInsets.only(
+                      top: constraints.maxHeight * 0.03,
+                      bottom: constraints.maxHeight * 0.02,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(70),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Learning is Everything",
+                          style: TextStyle(
+                            fontSize: constraints.maxWidth * 0.07,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1,
+                            wordSpacing: 2,
+                          ),
+                        ),
+                        SizedBox(height: constraints.maxHeight * 0.015),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: constraints.maxWidth * 0.1,
+                          ),
+                          child: Text(
+                            'Learning with Pleasure with Dear Programmer, Whenever you are.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: constraints.maxWidth * 0.04,
+                              color: Colors.black.withOpacity(0.6),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: constraints.maxHeight * 0.06),
+                        Material(
+                          color: Colors.lightGreen,
+                          borderRadius: BorderRadius.circular(10),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomePage(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: constraints.maxHeight * 0.03,
+                                horizontal: constraints.maxWidth * 0.2,
+                              ),
+                              child: Text(
+                                "Get Started",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: constraints.maxWidth * 0.06,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 2.666,
-                decoration: BoxDecoration(
-                  color: Colors.lightGreen,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 2.666,
-                padding: EdgeInsets.only(top: 40, bottom: 30),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(70),
-                  ),
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Text(
-                        "Learning is Everything",
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1,
-                          wordSpacing: 2,
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
-                        child: Text(
-                          'Learning with Pleasure with Dear Programmer, Whenever you are.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 17,
-                            color: Colors.black.withOpacity(0.6),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 60),
-                      Material(
-                        color: Colors.lightGreen,
-                        borderRadius: BorderRadius.circular(10),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomePage(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 15,
-                              horizontal: 80,
-                            ),
-                            child: Text(
-                              "Get Start",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
