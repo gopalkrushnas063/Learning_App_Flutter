@@ -41,16 +41,42 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       drawer: Drawer(
+        
         child: ListView(
-          children: [
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.lightGreen,
+                ),
+                accountName: Center(
+                  child: Text(
+                    "Krishna Tech World",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                accountEmail: Text(
+                  "If we teach today as we \n taught yesterday,we rob our children of tomorrow.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 11,
+                  ),
+                ),
+              ),
             ListTile(
-              title: Text('Menu Item 1'),
+              leading: Icon(Icons.person),
+              iconColor: Colors.lightGreen,
+              title: Text('Profile'),
               onTap: () {
                 // Handle menu item 1 click here.
               },
             ),
             ListTile(
-              title: Text('Menu Item 2'),
+              leading: Icon(Icons.share),
+              iconColor: Colors.lightGreen,
+              title: Text('Share App'),
               onTap: () {
                 // Handle menu item 2 click here.
               },
