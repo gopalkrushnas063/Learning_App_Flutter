@@ -101,8 +101,8 @@ class WelcomeScreen extends StatelessWidget {
                             },
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                vertical: constraints.maxHeight * 0.03,
-                                horizontal: constraints.maxWidth * 0.2,
+                                vertical: constraints.maxHeight * 0.019,
+                                horizontal: constraints.maxWidth * 0.22,
                               ),
                               child: Text(
                                 "Get Started",

@@ -68,9 +68,17 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               leading: Icon(Icons.person),
               iconColor: Colors.lightGreen,
-              title: Text('Profile'),
+              title: Text('Profile Section ̀'),
               onTap: () {
                 // Handle menu item 1 click here.
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.newspaper),
+              iconColor: Colors.lightGreen,
+              title: Text('Courses List'),
+              onTap: () {
+                // Handle menu item 2 click here.
               },
             ),
             ListTile(
