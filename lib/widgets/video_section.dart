@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
-class VideoSection extends StatelessWidget {
+class VideoSection extends StatefulWidget {
+  @override
+  _VideoSectionState createState() => _VideoSectionState();
+}
+
+class _VideoSectionState extends State<VideoSection> {
   List videoList = [
     'Introduction to Flutter',
     'Installing Flutter on Windows',
     'Setup Emulator on Windows',
     'Creating Our First App'
   ];
+
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -16,18 +23,27 @@ class VideoSection extends StatelessWidget {
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return ListTile(
+          onTap: () {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
           leading: Container(
             padding: EdgeInsets.all(5),
             decoration: BoxDecoration(
-              color: index == 0
-                  ? Color(0xFF674AEF)
-                  : Color(0xFF674AED).withOpacity(0.6),
+              color: index == selectedIndex
+                  ? Colors.lightGreen
+                  : Colors.lightGreen.withOpacity(0.6),
               shape: BoxShape.circle,
             ),
-            child: Icon(
-              Icons.play_arrow_rounded,
-              color: Colors.white,
-              size: 30,
+            child: Container(
+              width: 30,
+              height: 30,
+              child: Icon(
+                Icons.file_copy,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
           ),
           title: Text(

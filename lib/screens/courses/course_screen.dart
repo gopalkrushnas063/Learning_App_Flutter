@@ -33,7 +33,7 @@ class _CourseScreenState extends State<CourseScreen> {
             child: Icon(
               Icons.notifications,
               size: 28,
-              color: Color(0xFF674AEF),
+              color: Colors.lightGreen,
             ),
           ),
         ],
@@ -61,7 +61,7 @@ class _CourseScreenState extends State<CourseScreen> {
                   ),
                   child: Icon(
                     Icons.play_arrow_rounded,
-                    color: Color(0xFF674AEF),
+                    color: Colors.lightGreen,
                     size: 45,
                   ),
                 ),
@@ -106,8 +106,8 @@ class _CourseScreenState extends State<CourseScreen> {
                   Material(
                     // if isVideoSection condition true then that color will be on button and if condition is false then that color wil be shown on button but with some opacity.
                     color: isVideoSection
-                        ? Color(0xFF674AEF)
-                        : Color(0xFF674AEF).withOpacity(0.6),
+                        ? Colors.lightGreen
+                        : Colors.lightGreen.withOpacity(0.6),
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
                       onTap: () {
@@ -131,8 +131,8 @@ class _CourseScreenState extends State<CourseScreen> {
                   ),
                   Material(
                     color: isVideoSection
-                        ? Color(0xFF674AEF).withOpacity(0.5)
-                        : Color(0xFF674AEF),
+                        ? Colors.lightGreen.withOpacity(0.5)
+                        : Colors.lightGreen,
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
                       onTap: () {

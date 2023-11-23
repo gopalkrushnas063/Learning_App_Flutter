@@ -30,7 +30,7 @@ class DescriptionSection extends StatelessWidget {
               SizedBox(width: 5),
               Icon(
                 Icons.timer,
-                color: Color(0xFF674AEF),
+                color: Colors.lightGreen,
               ),
               SizedBox(width: 5),
               Text(

@@ -38,7 +38,7 @@ class CoursesGrid extends StatelessWidget {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-                color: Color(0xFF674AEF),
+                color: Colors.lightGreen,
               ),
             ),
           ],
