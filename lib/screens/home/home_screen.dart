@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:learning_app/screens/account/account_section.dart';
 import 'package:learning_app/screens/courses/all_courses_page.dart';
 import 'package:learning_app/screens/home/home_page_view.dart';
@@ -43,56 +44,61 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.lightGreen,
-              ),
-              accountName: Center(
-                child: Text(
-                  "Krishna Tech World",
+      drawer: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: const SystemUiOverlayStyle(
+          statusBarColor: Colors.lightGreen,
+        ),
+        child: Drawer(
+          child: ListView(
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.lightGreen,
+                ),
+                accountName: Center(
+                  child: Text(
+                    "Krishna Tech World",
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                accountEmail: Text(
+                  "If we teach today as we \n taught yesterday,we rob our children of tomorrow.",
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 11,
                   ),
                 ),
               ),
-              accountEmail: Text(
-                "If we teach today as we \n taught yesterday,we rob our children of tomorrow.",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 11,
-                ),
+              ListTile(
+                leading: Icon(Icons.person),
+                iconColor: Colors.lightGreen,
+                title: Text('Profile Section ̀'),
+                onTap: () {
+                  // Handle menu item 1 click here.
+                },
               ),
-            ),
-            ListTile(
-              leading: Icon(Icons.person),
-              iconColor: Colors.lightGreen,
-              title: Text('Profile Section ̀'),
-              onTap: () {
-                // Handle menu item 1 click here.
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.newspaper),
-              iconColor: Colors.lightGreen,
-              title: Text('Courses List'),
-              onTap: () {
-                // Handle menu item 2 click here.
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.share),
-              iconColor: Colors.lightGreen,
-              title: Text('Share App'),
-              onTap: () {
-                // Handle menu item 2 click here.
-              },
-            ),
-            // Add more menu items as needed.
-          ],
+              ListTile(
+                leading: Icon(Icons.newspaper),
+                iconColor: Colors.lightGreen,
+                title: Text('Courses List'),
+                onTap: () {
+                  // Handle menu item 2 click here.
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.share),
+                iconColor: Colors.lightGreen,
+                title: Text('Share App'),
+                onTap: () {
+                  // Handle menu item 2 click here.
+                },
+              ),
+              // Add more menu items as needed.
+            ],
+          ),
         ),
       ),
       body: _pages[_currentIndex],
