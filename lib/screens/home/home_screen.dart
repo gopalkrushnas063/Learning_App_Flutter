@@ -3,6 +3,7 @@ import 'package:learning_app/screens/account/account_section.dart';
 import 'package:learning_app/screens/courses/all_courses_page.dart';
 import 'package:learning_app/screens/home/home_page_view.dart';
 import 'package:learning_app/screens/wishlist/wish_list_screen.dart';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -23,7 +24,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -33,7 +33,10 @@ class _HomePageState extends State<HomePage> {
         toolbarHeight: 60,
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications,color: Colors.white,),
+            icon: Icon(
+              Icons.notifications,
+              color: Colors.white,
+            ),
             onPressed: () {
               // Handle the notification icon click here.
             },
@@ -41,30 +44,29 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       drawer: Drawer(
-        
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.lightGreen,
-                ),
-                accountName: Center(
-                  child: Text(
-                    "Krishna Tech World",
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                accountEmail: Text(
-                  "If we teach today as we \n taught yesterday,we rob our children of tomorrow.",
-                  textAlign: TextAlign.center,
+              decoration: BoxDecoration(
+                color: Colors.lightGreen,
+              ),
+              accountName: Center(
+                child: Text(
+                  "Krishna Tech World",
                   style: TextStyle(
-                    fontSize: 11,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
+              accountEmail: Text(
+                "If we teach today as we \n taught yesterday,we rob our children of tomorrow.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 11,
+                ),
+              ),
+            ),
             ListTile(
               leading: Icon(Icons.person),
               iconColor: Colors.lightGreen,
@@ -94,25 +96,56 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: _pages[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        showUnselectedLabels: true,
-        iconSize: 32,
-        selectedItemColor: Colors.lightGreen,
-        selectedFontSize: 18,
-        unselectedItemColor: Colors.grey,
+      bottomNavigationBar: ConvexAppBar(
+        backgroundColor: Colors.lightGreen,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.assignment), label: 'Courses'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Wishlist'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
+          TabItem(icon: Icons.home, title: 'Home'),
+          TabItem(icon: Icons.assignment, title: 'Courses'),
+          TabItem(icon: Icons.favorite, title: 'Wishlist'),
+          TabItem(icon: Icons.person, title: 'Account'),
         ],
+        onTap: (int index) {
+          // Implement your logic here based on the tapped index
+          setState(() {
+            _currentIndex =
+                index; // Assuming _currentIndex is a variable in your State
+          });
+
+          // You can add additional logic here based on the tapped index
+          switch (index) {
+            case 0:
+              // Logic for Home tab
+              break;
+            case 1:
+              // Logic for Discovery tab
+              break;
+            case 2:
+              // Logic for Add tab
+              break;
+            // Add more cases for additional tabs if needed
+          }
+        },
+        initialActiveIndex: _currentIndex, // Set initial active index
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: _currentIndex,
+      //   onTap: (int index) {
+      //     setState(() {
+      //       _currentIndex = index;
+      //     });
+      //   },
+      //   showUnselectedLabels: true,
+      //   iconSize: 32,
+      //   selectedItemColor: Colors.lightGreen,
+      //   selectedFontSize: 18,
+      //   unselectedItemColor: Colors.grey,
+      //   items: [
+      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+      //     BottomNavigationBarItem(icon: Icon(Icons.assignment), label: 'Courses'),
+      //     BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Wishlist'),
+      //     BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
+      //   ],
+      // ),
     );
   }
 }
