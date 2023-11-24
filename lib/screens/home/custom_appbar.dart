@@ -1,15 +1,12 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
-import 'package:animated_neumorphic/animated_neumorphic.dart';
 
 class CustomAppBar extends StatelessWidget {
   late final GlobalKey<ScaffoldState> scaffoldKey;
 
   @override
   Widget build(BuildContext context) {
-
     Color baseColor = Colors.lightGreen;
-
 
     return Container(
       padding: EdgeInsets.only(
@@ -38,31 +35,46 @@ class CustomAppBar extends StatelessWidget {
               color: Colors.lightGreen,
               textColor: Colors.lightGreen,
               size: 35,
-              
             ),
           ),
-          
           ClayContainer(
             borderRadius: 75,
-              curveType: CurveType.concave,
+            curveType: CurveType.none,
             width: MediaQuery.of(context).size.width,
             height: 55,
             color: baseColor,
-            child: TextFormField(
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: "Search here...",
-                hintStyle: TextStyle(
-                  color: Colors.black.withOpacity(0.5),
-                ),
-                prefixIcon: Icon(
-                  Icons.search,
-                  size: 25,
-                ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.search,
+                    size: 25,
+                    color: Colors.black.withOpacity(0.5),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: TextFormField(
+                      style: TextStyle(
+                        color: Colors.black.withOpacity(0.5),
+                        fontWeight: FontWeight.w600,
+                      ),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Search here...",
+                        hintStyle: TextStyle(
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          SizedBox(height: 15,),
+          SizedBox(
+            height: 15,
+          ),
         ],
       ),
     );

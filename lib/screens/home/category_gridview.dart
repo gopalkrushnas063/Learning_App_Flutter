@@ -56,13 +56,12 @@ class CategoryGrid extends StatelessWidget {
               ),
             ),
             SizedBox(height: 10),
-            Text(
+            ClayText(
               catNames[index],
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.black.withOpacity(0.7),
-              ),
+              textColor: Colors.black,
+              size: 16,
+              emboss: false,
+              
             ),
           ],
         );

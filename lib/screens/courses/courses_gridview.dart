@@ -19,8 +19,8 @@ class CoursesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double gridItemWidth = MediaQuery.of(context).size.width / 2 - 15; // Adjust the width based on screen size
-    double gridItemHeight = gridItemWidth * 1.4; // Maintain the same aspect ratio
+    double gridItemWidth = MediaQuery.of(context).size.width / 2 - 15; 
+    double gridItemHeight = gridItemWidth * 1.2; 
 
     return Column(
       
@@ -37,7 +37,6 @@ class CoursesGrid extends StatelessWidget {
             ClayText(
               "See All",
               size: 20,
-              
               textColor: Colors.black,
               emboss: false,
               
@@ -67,6 +66,7 @@ class CoursesGrid extends StatelessWidget {
                   );
                 },
                 child: ClayContainer(
+                  curveType: CurveType.none,
                   width: gridItemWidth,
                   height: gridItemHeight,
                   borderRadius: 20,

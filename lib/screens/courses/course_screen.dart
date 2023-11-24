@@ -162,7 +162,6 @@ class _CourseScreenState extends State<CourseScreen> {
             // Create for both description and video section
             SizedBox(height: 10),
             isVideoSection ? VideoSection() : DescriptionSection(),
-            
           ],
         ),
       ),
