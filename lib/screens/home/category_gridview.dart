@@ -51,6 +51,7 @@ class CategoryGrid extends StatelessWidget {
               height: 60,
               width: 60,
               borderRadius:50,
+              color: Color.fromARGB(255, 238, 250, 241),
               curveType: CurveType.concave,
               child: Center(
                 child: catIcons[index],

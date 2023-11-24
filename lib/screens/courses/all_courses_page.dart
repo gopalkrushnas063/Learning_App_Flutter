@@ -1,3 +1,4 @@
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 
 class AllCourseList extends StatelessWidget {
@@ -18,6 +19,9 @@ class AllCourseList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 238, 250, 241)
+      ),
       child: ListView.builder(
         itemCount: courseList.length,
         itemBuilder: (context, index) {
@@ -25,11 +29,12 @@ class AllCourseList extends StatelessWidget {
             onTap: () {},
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
+              child: ClayContainer(
+                borderRadius: 20,
+                depth: 20,
+                emboss: true,
+                curveType: CurveType.none,
+                color: Color.fromARGB(255, 238, 250, 241),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(

@@ -1,3 +1,4 @@
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 
 class WishList extends StatelessWidget {
@@ -18,6 +19,7 @@ class WishList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Color.fromARGB(255, 238, 250, 241),
       child: ListView.builder(
         itemCount: courseList.length,
         itemBuilder: (context, index) {
@@ -25,11 +27,11 @@ class WishList extends StatelessWidget {
             onTap: () {},
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
+              child: ClayContainer(
+                color: Color.fromARGB(255, 238, 250, 241),
+                borderRadius: 20,
+                depth: 20,
+                emboss: true,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -40,10 +42,13 @@ class WishList extends StatelessWidget {
                         height: 100,
                       ),
                       SizedBox(width: 20),
-                      Text("${courseList[index]}",style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      ),)
+                      Text(
+                        "${courseList[index]}",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),

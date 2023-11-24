@@ -11,6 +11,7 @@ class HomePageSection extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 238, 250, 241),
       body: ListView(
         children: [
           CustomAppBar(),
