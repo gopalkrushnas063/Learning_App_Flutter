@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/screens/login/login_screen.dart';
 import 'package:learning_app/screens/signup/signup.dart';
 import 'package:lottie/lottie.dart';
+import 'package:clay_containers/clay_containers.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Color baseColor = Colors.lightGreen;
     return Scaffold(
-      appBar: AppBar(),
       body: SafeArea(
         child: Container(
+          decoration: BoxDecoration(
+            color: Colors.lightGreen,
+          ),
           width: double.infinity,
           height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 30),
@@ -21,17 +25,19 @@ class SignupScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
+                  ClayText(
                     "Hello There!",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
+                    emboss: false,
+                    size: 40,
+                    color: Colors.lightGreen,
+                    textColor: Colors.lightGreen,
                   ),
                   SizedBox(
                     height: 30,
                   ),
-                  Text(
-                    "Automatic identity verification which enable you to verify your identity",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.grey[700], fontSize: 15),
+                  
+                   SizedBox(
+                    height: 30,
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height / 3,
@@ -40,84 +46,66 @@ class SignupScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(height: 50),
-                  MaterialButton(
-                    minWidth: double.infinity,
-                    height: 60,
-                    onPressed: () {
+                  SizedBox(height: 120),
+                  GestureDetector(
+                    onTap: (){
                       Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => LoginScreen(),
-                                ),
-                              );
-                    },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    child: Ink(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Colors.lightGreen, Colors.green],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LoginScreen(),
                         ),
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                      child: Container(
-                        constraints:
-                            BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Login",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
+                      );
+                    },
+                    child: Container(
+                      color: baseColor,
+                      child: Center(
+                        child: ClayContainer(
+                          color: baseColor,
+                          height: 60,
+                          width: 280,
+                          borderRadius: 15,
+                          child: Center(
+                              child: ClayText(
+                            "Login",
+                            emboss: false,
+                            textColor: Colors.lightGreen,
+                            color: Colors.lightGreen,
+                            size: 25,
+                          )),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  MaterialButton(
-                    minWidth: double.infinity,
-                    height: 60,
-                    onPressed: () {
+                  SizedBox(height: 40),
+                  GestureDetector(
+                    onTap: (){
                       Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => RegisterScreen(),
-                                ),
-                              );
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RegisterScreen(),
+                        ),
+                      );
                     },
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40),
-                    ),
-                    child: Ink(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Colors.green, Colors.greenAccent],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                        ),
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                      child: Container(
-                        constraints:
-                            BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          "Signup",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
-                          ),
+                    child: Container(
+                      color: baseColor,
+                      child: Center(
+                        child: ClayContainer(
+                          color: baseColor,
+                          height: 60,
+                          width: 280,
+                          borderRadius: 15,
+                          child: Center(
+                              child: ClayText(
+                            "Signup",
+                            emboss: false,
+                            textColor: Colors.lightGreen,
+                            color: Colors.lightGreen,
+                            size: 25,
+                          )),
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ],
