@@ -1,3 +1,4 @@
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_app/screens/courses/course_screen.dart';
 
@@ -19,7 +20,7 @@ class CoursesGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double gridItemWidth = MediaQuery.of(context).size.width / 2 - 15; // Adjust the width based on screen size
-    double gridItemHeight = gridItemWidth * 1.4; // Maintain the same aspect ratio
+    double gridItemHeight = gridItemWidth * 1.2; // Maintain the same aspect ratio
 
     return Column(
       children: [
@@ -64,14 +65,12 @@ class CoursesGrid extends StatelessWidget {
                         builder: (context) => CourseScreen(imgList[index])),
                   );
                 },
-                child: Container(
+                child: ClayContainer(
                   width: gridItemWidth,
                   height: gridItemHeight,
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Color(0xFFF5F3FF),
-                  ),
+                  borderRadius: 20,
+                  color: Color(0xFFF5F3FF),
+                  curveType: CurveType.concave,
                   child: Column(
                     children: [
                       Padding(
