@@ -23,8 +23,10 @@ class CoursesGrid extends StatelessWidget {
     double gridItemHeight = gridItemWidth * 1.4; // Maintain the same aspect ratio
 
     return Column(
+      
       children: [
         Row(
+          
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ClayText(
@@ -44,6 +46,7 @@ class CoursesGrid extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Container(
+          color: Color.fromARGB(255, 238, 250, 241),
           child: GridView.builder(
             itemCount: imgList.length,
             shrinkWrap: true,
@@ -68,11 +71,7 @@ class CoursesGrid extends StatelessWidget {
                   height: gridItemHeight,
                   borderRadius: 20,
                   color: Color.fromARGB(255, 238, 250, 241),
-                  // padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                  // decoration: BoxDecoration(
-                  //   borderRadius: BorderRadius.circular(20),
-                  //   color: Color(0xFFF5F3FF),
-                  // ),
+                 
                   child: Column(
                     children: [
                       Padding(

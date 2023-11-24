@@ -48,7 +48,7 @@ class CategoryGrid extends StatelessWidget {
             ClayContainer(
               height: 60,
               width: 60,
-              color: Colors.white,
+              color: Color.fromARGB(255, 238, 250, 241),
               borderRadius: 50,
               curveType: CurveType.concave,
               child: Center(
