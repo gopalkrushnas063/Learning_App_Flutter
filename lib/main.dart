@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:learning_app/routes/routes.dart';
 import 'package:learning_app/screens/welcome_screen.dart';
 
@@ -10,8 +9,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Color.fromARGB(255, 238, 250, 241)));
+    
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

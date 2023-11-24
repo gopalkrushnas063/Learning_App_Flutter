@@ -1,10 +1,14 @@
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:learning_app/screens/signup/signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.lightGreen));
     return Material(
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -17,7 +21,7 @@ class WelcomeScreen extends StatelessWidget {
                   width: constraints.maxWidth,
                   height: constraints.maxHeight / 1.6,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 238, 250, 241),
                   ),
                 ),
                 Container(
@@ -56,7 +60,7 @@ class WelcomeScreen extends StatelessWidget {
                       bottom: constraints.maxHeight * 0.02,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 238, 250, 241),
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(70),
                       ),
@@ -88,7 +92,7 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                         SizedBox(height: constraints.maxHeight * 0.06),
                         Material(
-                          color: Colors.lightGreen,
+                          color: Color.fromARGB(255, 238, 250, 241),
                           borderRadius: BorderRadius.circular(10),
                           child: InkWell(
                             onTap: () {
@@ -99,18 +103,20 @@ class WelcomeScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                vertical: constraints.maxHeight * 0.019,
-                                horizontal: constraints.maxWidth * 0.22,
-                              ),
-                              child: Text(
-                                "Get Started",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: constraints.maxWidth * 0.06,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 1,
+                            child: ClayContainer(
+                              width: 250,
+                              height: 60,
+                              color: Color.fromARGB(255, 238, 250, 241),
+                              borderRadius: 15,
+                              child: Center(
+                                child: Text(
+                                  "Get Started",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: constraints.maxWidth * 0.06,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1,
+                                  ),
                                 ),
                               ),
                             ),

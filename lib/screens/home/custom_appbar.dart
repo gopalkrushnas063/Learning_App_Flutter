@@ -1,8 +1,42 @@
+import 'dart:async';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatefulWidget {
+  @override
+  _CustomAppBarState createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
   late final GlobalKey<ScaffoldState> scaffoldKey;
+  int hintTextIndex = 0;
+  late Timer _timer;
+  List<String> hintTexts = [
+    "Search Courses",
+    "Search Books",
+    "Search Classes",
+    // Add more hint texts if needed
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        hintTextIndex = (hintTextIndex + 1) % hintTexts.length;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +96,7 @@ class CustomAppBar extends StatelessWidget {
                       ),
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Search here...",
+                        hintText: hintTexts[hintTextIndex],
                         hintStyle: TextStyle(
                           color: Colors.black.withOpacity(0.5),
                         ),

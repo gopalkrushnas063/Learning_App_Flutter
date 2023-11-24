@@ -63,7 +63,7 @@ class AccountSection extends StatelessWidget {
                 title: "Help Center",
                 subtitle: "FAQ/ Customer Care Connect",
               ),
-              SizedBox(height: 25),
+              SizedBox(height: 12),
               ClayContainer(
                 width: 340,
                 height: 50,
@@ -93,58 +93,57 @@ class AccountSection extends StatelessWidget {
     required String subtitle,
   }) {
     return ClayContainer(
-  width: 340,
-  height: 60,
-  color: Color.fromARGB(255, 238, 250, 241),
-  borderRadius: 30,
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      SizedBox(width: 20),
-      Container(
-        width: 40,
-        height: 40,
-        child: Icon(
-          icon,
-          size: 30,
-          color: Colors.black,
-        ),
-      ),
-      SizedBox(width: 15),
-      Expanded(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
+      width: 340,
+      height: 60,
+      color: Color.fromARGB(255, 238, 250, 241),
+      borderRadius: 30,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(width: 20),
+          Container(
+            width: 40,
+            height: 40,
+            child: Icon(
+              icon,
+              size: 30,
+              color: Colors.black,
             ),
-            SizedBox(height: 5),
-            Text(
-              subtitle,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 14,
-              ),
+          ),
+          SizedBox(width: 15),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          SizedBox(width: 15),
+          Icon(
+            Icons.arrow_forward_ios,
+            size: 30,
+            color: Colors.black,
+          ),
+          SizedBox(width: 20),
+        ],
       ),
-      SizedBox(width: 15),
-      Icon(
-        Icons.arrow_forward_ios,
-        size: 30,
-        color: Colors.black,
-      ),
-      SizedBox(width: 20),
-    ],
-  ),
-)
-;
+    );
   }
 }
