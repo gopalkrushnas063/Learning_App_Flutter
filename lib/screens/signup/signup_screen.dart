@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:learning_app/screens/login/login_screen.dart';
 import 'package:learning_app/screens/signup/signup.dart';
 import 'package:lottie/lottie.dart';
@@ -9,8 +10,11 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.lightGreen));
     Color baseColor = Colors.lightGreen;
     return Scaffold(
+      
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(

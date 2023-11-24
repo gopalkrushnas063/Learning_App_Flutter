@@ -1,10 +1,16 @@
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:animated_neumorphic/animated_neumorphic.dart';
 
 class CustomAppBar extends StatelessWidget {
   late final GlobalKey<ScaffoldState> scaffoldKey;
 
   @override
   Widget build(BuildContext context) {
+
+    Color baseColor = Colors.lightGreen;
+
+
     return Container(
       padding: EdgeInsets.only(
         top: 15,
@@ -27,29 +33,21 @@ class CustomAppBar extends StatelessWidget {
               left: 3,
               bottom: 15,
             ),
-            child: Text(
+            child: ClayText(
               "Hi Learner",
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 1,
-                wordSpacing: 2,
-                color: Colors.white,
-              ),
+              color: Colors.lightGreen,
+              textColor: Colors.lightGreen,
+              size: 35,
+              
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(
-              top: 5,
-              bottom: 20,
-            ),
+          
+          ClayContainer(
+            borderRadius: 75,
+              curveType: CurveType.concave,
             width: MediaQuery.of(context).size.width,
             height: 55,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
+            color: baseColor,
             child: TextFormField(
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -64,6 +62,7 @@ class CustomAppBar extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 15,),
         ],
       ),
     );
