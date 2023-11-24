@@ -1,4 +1,3 @@
-import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:learning_app/screens/courses/course_screen.dart';
 
@@ -19,33 +18,33 @@ class CoursesGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double gridItemWidth = MediaQuery.of(context).size.width / 2 - 15; 
-    double gridItemHeight = gridItemWidth * 1.2; 
+    double gridItemWidth = MediaQuery.of(context).size.width / 2 - 15; // Adjust the width based on screen size
+    double gridItemHeight = gridItemWidth * 1.4; // Maintain the same aspect ratio
 
     return Column(
-      
       children: [
         Row(
-          
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ClayText(
+            Text(
               "Courses",
-              size: 23,
-              textColor: Colors.black,
+              style: TextStyle(
+                fontSize: 23,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-            ClayText(
+            Text(
               "See All",
-              size: 20,
-              textColor: Colors.black,
-              emboss: false,
-              
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+                color: Colors.lightGreen,
+              ),
             ),
           ],
         ),
         SizedBox(height: 10),
         Container(
-          color: Color.fromARGB(255, 238, 250, 241),
           child: GridView.builder(
             itemCount: imgList.length,
             shrinkWrap: true,
@@ -65,13 +64,14 @@ class CoursesGrid extends StatelessWidget {
                         builder: (context) => CourseScreen(imgList[index])),
                   );
                 },
-                child: ClayContainer(
-                  curveType: CurveType.none,
+                child: Container(
                   width: gridItemWidth,
                   height: gridItemHeight,
-                  borderRadius: 20,
-                  color: Color.fromARGB(255, 238, 250, 241),
-                 
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color(0xFFF5F3FF),
+                  ),
                   child: Column(
                     children: [
                       Padding(
@@ -83,20 +83,22 @@ class CoursesGrid extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 10),
-                      ClayText(
+                      Text(
                         courseList[index],
-                        size: 21,
-                        color: Color.fromARGB(255, 238, 250, 241),
-                        textColor: Colors.black,
-                        emboss: false,
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
                       ),
                       SizedBox(height: 10),
-                      ClayText(
+                      Text(
                         '55 Videos',
-                        size: 15,
-                        color: Color.fromARGB(255, 238, 250, 241),
-                        textColor: Colors.black,
-                        emboss: false,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
                       ),
                     ],
                   ),

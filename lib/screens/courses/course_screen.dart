@@ -43,7 +43,6 @@ class _CourseScreenState extends State<CourseScreen> {
         child: ListView(
           children: [
             Container(
-              color: Color.fromARGB(255, 238, 250, 241),
               padding: EdgeInsets.all(5),
               width: MediaQuery.of(context).size.width,
               height: 200,
@@ -162,6 +161,7 @@ class _CourseScreenState extends State<CourseScreen> {
             // Create for both description and video section
             SizedBox(height: 10),
             isVideoSection ? VideoSection() : DescriptionSection(),
+            
           ],
         ),
       ),

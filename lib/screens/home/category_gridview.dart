@@ -1,4 +1,3 @@
-import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 
 class CategoryGrid extends StatelessWidget {
@@ -23,12 +22,12 @@ class CategoryGrid extends StatelessWidget {
   ];
 
   List<Icon> catIcons = [
-    Icon(Icons.category, color: Color(0xFFFFCF2F), size: 30),
-    Icon(Icons.video_library, color: Color(0xFF6FE08D), size: 30),
-    Icon(Icons.assignment, color: Color(0xFF618DFD), size: 30),
-    Icon(Icons.store, color: Color(0xFFFC7F7F), size: 30),
-    Icon(Icons.play_circle_fill, color: Color(0xFFC084FB), size: 30),
-    Icon(Icons.emoji_events, color: Color(0xFF78E667), size: 30),
+    Icon(Icons.category, color: Colors.white, size: 30),
+    Icon(Icons.video_library, color: Colors.white, size: 30),
+    Icon(Icons.assignment, color: Colors.white, size: 30),
+    Icon(Icons.store, color: Colors.white, size: 30),
+    Icon(Icons.play_circle_fill, color: Colors.white, size: 30),
+    Icon(Icons.emoji_events, color: Colors.white, size: 30),
   ];
 
 
@@ -45,23 +44,25 @@ class CategoryGrid extends StatelessWidget {
       itemBuilder: (context, index) {
         return Column(
           children: [
-            ClayContainer(
+            Container(
               height: 60,
               width: 60,
-              color: Color.fromARGB(255, 238, 250, 241),
-              borderRadius: 50,
-              curveType: CurveType.concave,
+              decoration: BoxDecoration(
+                color: catColors[index],
+                shape: BoxShape.circle,
+              ),
               child: Center(
                 child: catIcons[index],
               ),
             ),
             SizedBox(height: 10),
-            ClayText(
+            Text(
               catNames[index],
-              textColor: Colors.black,
-              size: 16,
-              emboss: false,
-              
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.black.withOpacity(0.7),
+              ),
             ),
           ],
         );
