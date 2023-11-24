@@ -11,14 +11,14 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.lightGreen));
-    Color baseColor = Colors.lightGreen;
+        SystemUiOverlayStyle(statusBarColor: Color.fromARGB(255, 238, 250, 241)));
+    Color baseColor = Color.fromARGB(255, 238, 250, 241);
     return Scaffold(
       
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.lightGreen,
+            color: Color.fromARGB(255, 238, 250, 241),
           ),
           width: double.infinity,
           height: MediaQuery.of(context).size.height,

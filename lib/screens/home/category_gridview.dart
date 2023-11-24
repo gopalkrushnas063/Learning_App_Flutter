@@ -42,8 +42,10 @@ class CategoryGrid extends StatelessWidget {
         crossAxisCount: 3,
         childAspectRatio: 1.1,
       ),
+      
       itemBuilder: (context, index) {
         return Column(
+          
           children: [
             ClayContainer(
               height: 60,

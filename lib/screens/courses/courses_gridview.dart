@@ -69,7 +69,7 @@ class CoursesGrid extends StatelessWidget {
                   width: gridItemWidth,
                   height: gridItemHeight,
                   borderRadius: 20,
-                  color: Color(0xFFF5F3FF),
+                  color: Color.fromARGB(255, 238, 250, 241),
                   curveType: CurveType.concave,
                   child: Column(
                     children: [

@@ -7,7 +7,7 @@ class AccountSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color baseColor = Colors.lightGreen;
+    Color baseColor = Color.fromARGB(255, 238, 250, 241);
     return ClayContainer(
       color: baseColor,
       child: SingleChildScrollView(
@@ -95,7 +95,7 @@ class AccountSection extends StatelessWidget {
     return ClayContainer(
   width: 340,
   height: 60,
-  color: Colors.lightGreen,
+  color: Color.fromARGB(255, 238, 250, 241),
   borderRadius: 30,
   child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,

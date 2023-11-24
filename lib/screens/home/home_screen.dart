@@ -28,15 +28,15 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Colors.white,
+          color: Colors.black,
         ),
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Color.fromARGB(255, 238, 250, 241),
         toolbarHeight: 60,
         actions: [
           IconButton(
             icon: Icon(
               Icons.notifications,
-              color: Colors.white,
+              color: Colors.black,
             ),
             onPressed: () {
               // Handle the notification icon click here.

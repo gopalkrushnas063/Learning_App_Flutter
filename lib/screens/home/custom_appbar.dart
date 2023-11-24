@@ -6,7 +6,7 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color baseColor = Colors.lightGreen;
+    Color baseColor = Color.fromARGB(255, 238, 250, 241);
 
     return Container(
       padding: EdgeInsets.only(
@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget {
         bottom: 10,
       ),
       decoration: BoxDecoration(
-        color: Colors.lightGreen,
+        color: Color.fromARGB(255, 238, 250, 241),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(20),
           bottomRight: Radius.circular(20),
@@ -30,11 +30,12 @@ class CustomAppBar extends StatelessWidget {
               left: 3,
               bottom: 15,
             ),
-            child: ClayText(
+            child: Text(
               "Hi Learner",
-              color: Colors.lightGreen,
-              textColor: Colors.lightGreen,
-              size: 35,
+              style: TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           ClayContainer(
