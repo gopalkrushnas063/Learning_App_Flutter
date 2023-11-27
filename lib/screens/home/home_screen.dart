@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:learning_app/myhome_page.dart';
 import 'package:learning_app/screens/account/account_section.dart';
 import 'package:learning_app/screens/courses/all_courses_page.dart';
 import 'package:learning_app/screens/home/home_page_view.dart';
@@ -94,6 +95,19 @@ class _HomePageState extends State<HomePage> {
                 title: Text('Share App'),
                 onTap: () {
                   // Handle menu item 2 click here.
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.home),
+                iconColor: Colors.lightGreen,
+                title: Text('My Home Page'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyHomePage(),
+                    ),
+                  );
                 },
               ),
               // Add more menu items as needed.
