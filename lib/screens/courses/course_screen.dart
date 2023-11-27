@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learning_app/widgets/description_section.dart';
-import 'package:learning_app/widgets/video_section.dart';
+import 'package:learning_app/widgets/material_section.dart';
 
 class CourseScreen extends StatefulWidget {
   String img;
@@ -86,7 +86,7 @@ class _CourseScreenState extends State<CourseScreen> {
             ),
             SizedBox(height: 5),
             Text(
-              '55 Videos',
+              '55 Materials',
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
@@ -120,9 +120,9 @@ class _CourseScreenState extends State<CourseScreen> {
                         padding:
                             EdgeInsets.symmetric(vertical: 15, horizontal: 35),
                         child: Text(
-                          'Videos',
+                          'Materials',
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.w500,
                               color: Colors.white),
                         ),
@@ -147,7 +147,7 @@ class _CourseScreenState extends State<CourseScreen> {
                         child: Text(
                           'Description',
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.w500,
                               color: Colors.white),
                         ),

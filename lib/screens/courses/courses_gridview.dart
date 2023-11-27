@@ -92,7 +92,7 @@ class CoursesGrid extends StatelessWidget {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        '55 Videos',
+                        '55 Materials',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,

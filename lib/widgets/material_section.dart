@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_app/widgets/tutorials_view.dart';
 
 class VideoSection extends StatefulWidget {
   @override
@@ -27,6 +28,7 @@ class _VideoSectionState extends State<VideoSection> {
             setState(() {
               selectedIndex = index;
             });
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> TutorialsView(videoList[index])));
           },
           leading: Container(
             padding: EdgeInsets.all(5),
