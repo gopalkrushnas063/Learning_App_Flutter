@@ -129,7 +129,7 @@ class AccountSection extends StatelessWidget {
                   subtitle,
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 14,
+                    fontSize: 11,
                   ),
                 ),
               ],

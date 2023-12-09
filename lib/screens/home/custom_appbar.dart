@@ -44,10 +44,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
 
     return Container(
       padding: EdgeInsets.only(
-        top: 15,
         right: 15,
         left: 15,
-        bottom: 10,
       ),
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 238, 250, 241),
@@ -67,7 +65,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             child: Text(
               "Hi Learner",
               style: TextStyle(
-                fontSize: 35,
+                fontSize: 25,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -82,10 +80,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.search,
-                    size: 25,
-                    color: Colors.black.withOpacity(0.5),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.search,
+                      size: 25,
+                      color: Colors.black.withOpacity(0.5),
+                    ),
                   ),
                   SizedBox(width: 10),
                   Expanded(

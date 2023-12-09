@@ -5,11 +5,11 @@ class CategoryGrid extends StatelessWidget {
 
   //Creating static data in lists
   List catNames = [
-    'Category',
-    'Classes',
-    'Courses',
-    'E-Book Store',
-    'Live Courses',
+    'All Exams',
+    'Daily Practices',
+    'Mock Test',
+    'Question Papers',
+    'Why Choose Us',
     'Leader Board'
   ];
 
@@ -23,11 +23,11 @@ class CategoryGrid extends StatelessWidget {
   ];
 
   List<Icon> catIcons = [
-    Icon(Icons.category, color: Color(0xFFFFCF2F), size: 30),
-    Icon(Icons.video_library, color: Color(0xFF6FE08D), size: 30),
+    Icon(Icons.all_inbox, color: Color(0xFFFFCF2F), size: 30),
+    Icon(Icons.question_answer, color: Color(0xFF6FE08D), size: 30),
     Icon(Icons.assignment, color: Color(0xFF618DFD), size: 30),
-    Icon(Icons.store, color: Color(0xFFFC7F7F), size: 30),
-    Icon(Icons.play_circle_fill, color: Color(0xFFC084FB), size: 30),
+    Icon(Icons.question_answer_outlined, color: Color(0xFFFC7F7F), size: 30),
+    Icon(Icons.question_mark, color: Color(0xFFC084FB), size: 30),
     Icon(Icons.emoji_events, color: Color(0xFF78E667), size: 30),
   ];
 
@@ -60,8 +60,10 @@ class CategoryGrid extends StatelessWidget {
             SizedBox(height: 10),
             Text(
               catNames[index],
+              maxLines: 2,
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 12,
+                
                 fontWeight: FontWeight.w500,
                 color: Colors.black.withOpacity(0.7),
               ),

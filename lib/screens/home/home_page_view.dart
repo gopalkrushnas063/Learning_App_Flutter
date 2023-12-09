@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/screens/home/category_gridview.dart';
 import 'package:learning_app/screens/courses/courses_gridview.dart';
 import 'package:learning_app/screens/home/custom_appbar.dart';
+import 'package:learning_app/views/banner_carousel.dart';
 
 
 class HomePageSection extends StatelessWidget {
@@ -24,6 +25,8 @@ class HomePageSection extends StatelessWidget {
               ),
               child: Column(
                 children: [
+                  CarouselView(),
+                  SizedBox(height: 20,),
                   CategoryGrid(),
                   CoursesGrid(),
                 ],
