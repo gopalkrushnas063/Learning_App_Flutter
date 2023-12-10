@@ -1,10 +1,11 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:learning_app/screens/home/category_page.dart';
+import 'package:learning_app/services/api_services.dart';
+
 
 class CategoryGrid extends StatelessWidget {
-
-  //Creating static data in lists
-  List catNames = [
+  final List<String> catNames = [
     'All Exams',
     'Daily Practices',
     'Mock Test',
@@ -22,15 +23,25 @@ class CategoryGrid extends StatelessWidget {
     Color(0xFF78E667),
   ];
 
-  List<Icon> catIcons = [
-    Icon(Icons.all_inbox, color: Color(0xFFFFCF2F), size: 30),
-    Icon(Icons.question_answer, color: Color(0xFF6FE08D), size: 30),
-    Icon(Icons.assignment, color: Color(0xFF618DFD), size: 30),
-    Icon(Icons.question_answer_outlined, color: Color(0xFFFC7F7F), size: 30),
-    Icon(Icons.question_mark, color: Color(0xFFC084FB), size: 30),
-    Icon(Icons.emoji_events, color: Color(0xFF78E667), size: 30),
+  final List<String> apiEndpoints = [
+    'all_exams.json',
+    'daily_practices.json',
+    'mock_test.json',
+    'question_papers.json',
+    'why_we_choose.json',
+    'leader_board.json',
   ];
 
+  final List<IconData> catIcons = [
+    Icons.all_inbox,
+    Icons.question_answer,
+    Icons.assignment,
+    Icons.question_answer_outlined,
+    Icons.question_mark,
+    Icons.emoji_events,
+  ];
+
+  final ApiService apiService = ApiService();
 
   @override
   Widget build(BuildContext context) {
@@ -42,35 +53,57 @@ class CategoryGrid extends StatelessWidget {
         crossAxisCount: 3,
         childAspectRatio: 1.1,
       ),
-      
       itemBuilder: (context, index) {
-        return Column(
-          
-          children: [
-            ClayContainer(
-              height: 60,
-              width: 60,
-              borderRadius:50,
+        return GestureDetector(
+          onTap: () {
+            _navigateToCategoryPage(context, apiEndpoints[index]);
+          },
+          child: Column(
+            children: [
+              ClayContainer(
+                height: 60,
+                width: 60,
+                borderRadius:50,
               color: Color.fromARGB(255, 238, 250, 241),
               curveType: CurveType.concave,
-              child: Center(
-                child: catIcons[index],
+                child: Center(
+                  child: Icon(
+                    catIcons[index],
+                    size: 30,
+                    color: catColors[index],
+                  ),
+                ),
               ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              catNames[index],
-              maxLines: 2,
-              style: TextStyle(
-                fontSize: 12,
-                
-                fontWeight: FontWeight.w500,
-                color: Colors.black.withOpacity(0.7),
+              SizedBox(height: 10),
+              Text(
+                catNames[index],
+                maxLines: 2,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black.withOpacity(0.7),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );
+  }
+
+  void _navigateToCategoryPage(BuildContext context, String endpoint) async {
+    try {
+      List<dynamic> fetchedData = await apiService.fetchDataFromApi(endpoint);
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CategoryPage(categoryData: fetchedData,categoryName: endpoint,),
+        ),
+      );
+    } catch (e) {
+      // Handle error fetching data
+      print('Error: $e');
+    }
   }
 }
