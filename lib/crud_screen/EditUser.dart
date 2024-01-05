@@ -93,8 +93,7 @@ class _EditUserState extends State<EditUser> {
                 children: [
                   TextButton(
                       style: TextButton.styleFrom(
-                          primary: Colors.white,
-                          backgroundColor: Colors.teal,
+                          foregroundColor: Colors.white, backgroundColor: Colors.teal,
                           textStyle: const TextStyle(fontSize: 15)),
                       onPressed: () async {
                         setState(() {
@@ -128,8 +127,7 @@ class _EditUserState extends State<EditUser> {
                   ),
                   TextButton(
                       style: TextButton.styleFrom(
-                          primary: Colors.white,
-                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white, backgroundColor: Colors.red,
                           textStyle: const TextStyle(fontSize: 15)),
                       onPressed: () {
                         _userNameController.text = '';

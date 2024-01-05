@@ -67,8 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
           actions: [
             TextButton(
               style: TextButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Colors.red,
+                foregroundColor: Colors.white, backgroundColor: Colors.red,
               ),
               onPressed: () async {
                 var result = await _userService.deleteUser(userId);
@@ -82,8 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             TextButton(
               style: TextButton.styleFrom(
-                primary: Colors.white,
-                backgroundColor: Colors.teal,
+                foregroundColor: Colors.white, backgroundColor: Colors.teal,
               ),
               onPressed: () {
                 Navigator.pop(context);

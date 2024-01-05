@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/model/banner.dart';
 import 'package:learning_app/viewmodels/banner_viewmodel.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CarouselView extends StatefulWidget {

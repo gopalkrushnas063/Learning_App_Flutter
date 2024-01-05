@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:learning_app/db_helper/repository.dart';
 import 'package:learning_app/model/User.dart';
