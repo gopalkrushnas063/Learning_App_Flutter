@@ -1,62 +1,108 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:learning_app/components/background.dart';
 import 'package:learning_app/screens/home/home_screen.dart';
 import 'package:learning_app/screens/signup/signup.dart';
+import 'package:http/http.dart' as http;
 
-class LoginScreen extends StatelessWidget {
-  final String validUsername = 'admin';
-  final String validPassword = 'admin';
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
 
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  void _login(BuildContext context) {
-  String enteredUsername = usernameController.text;
-  String enteredPassword = passwordController.text;
+  // Function to handle the login process
+  void _login(BuildContext context) async {
+    String enteredUsername = usernameController.text;
+    String enteredPassword = passwordController.text;
 
-  if (enteredUsername == validUsername && enteredPassword == validPassword) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Login Successful'),
-          content: Text('Welcome, $enteredUsername!'),
-          actions: <Widget>[
-            TextButton(
-              child: Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
-              },
-            ),
-          ],
+    // API endpoint
+    String apiUrl = 'http://localhost:8090/user/login';
+
+    // Request body
+    Map<String, dynamic> requestBody = {
+      'email': enteredUsername,
+      'password': enteredPassword,
+    };
+
+    try {
+      // Sending a POST request
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(requestBody),
+      );
+
+      if (response.statusCode == 200) {
+        // Successful login
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Login Successful'),
+              content: Text('Welcome, $enteredUsername!'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
+                  },
+                ),
+              ],
+            );
+          },
         );
-      },
-    );
-  } else {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Login Failed'),
-          content: Text('Username or password is incorrect.'),
-          actions: <Widget>[
-            TextButton(
-              child: Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
+      } else if (response.statusCode == 401) {
+        // User not found or incorrect password
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Login Failed'),
+              content: Text('Username or password is incorrect.'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
         );
-      },
-    );
+      } else {
+        // Handle other status codes as needed
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Login Failed'),
+              content: Text('An error occurred. Please try again later.'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (error) {
+      // Handle any exceptions that might occur during the request
+      print('Error during login: $error');
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {

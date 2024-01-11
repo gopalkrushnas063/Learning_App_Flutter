@@ -18,39 +18,60 @@ class CategoryPage extends StatelessWidget {
         backgroundColor: baseColor,
         title: Text(categoryName),
       ),
-      body: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
-          crossAxisSpacing: 4.0,
-          mainAxisSpacing: 4.0,
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
-        itemCount: categoryData.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>TestList() ,));
-              },
-              child: ClayContainer(
-                borderRadius: 12,
-                color: baseColor,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.network(
-                      categoryData[index]['images'],
-                      width: 50,
-                    ),
-                    SizedBox(height: 10,),
-                    Text(categoryData[index]['title'],style: TextStyle(fontSize: 12),),
-                  ],
-                ),
+        child: ListView.builder(
+          itemCount: categoryData.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => TestList(),
+                  ));
+                },
+                child: ClayContainer(
+                    borderRadius: 12,
+                    color: baseColor,
+                    height: 80,
+                    child: Row(
+                      children: [
+                        Image.network(
+                          categoryData[index]['images'],
+                          width: 50,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          categoryData[index]['title'],
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right:18.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Icon(
+                                  Icons.fast_forward,
+                                  color: Colors.lightGreen,
+                                  size: 30.0,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

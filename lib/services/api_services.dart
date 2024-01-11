@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseUrl = 'https://gopalkrushnas063.github.io/Test_Series_JSON/';
+  static const String baseUrl =
+      'https://gopalkrushnas063.github.io/Test_Series_JSON/';
 
   Future<List<dynamic>> fetchAllBanners() async {
     try {
@@ -31,5 +33,28 @@ class ApiService {
     } catch (e) {
       throw Exception('Failed to fetch data from $endpoint: $e');
     }
+  }
+
+  Future<http.Response> registerUser(
+    String name,
+    String phoneNumber,
+    String email,
+    String password,
+  ) async {
+    final url = Uri.parse('http://localhost:8090/user/register');
+    final body = json.encode({
+      "name": name,
+      "phoneNumber": phoneNumber,
+      "email": email,
+      "password": password,
+    });
+
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: body,
+    );
+
+    return response;
   }
 }
