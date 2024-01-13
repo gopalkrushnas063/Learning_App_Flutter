@@ -52,24 +52,28 @@ class _HomePageState extends State<HomePage> {
         child: Drawer(
           child: ListView(
             children: <Widget>[
-              UserAccountsDrawerHeader(
+              DrawerHeader(
                 decoration: BoxDecoration(
                   color: Colors.lightGreen,
                 ),
-                accountName: Center(
-                  child: Text(
-                    "Krishna Tech World",
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                accountEmail: Text(
-                  "If we teach today as we \n taught yesterday,we rob our children of tomorrow.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 11,
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        "Krishna Tech World",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        "If we teach today as we \n taught yesterday,we rob our children of tomorrow.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

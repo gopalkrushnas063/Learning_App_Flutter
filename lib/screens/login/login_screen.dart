@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
     String enteredPassword = passwordController.text;
 
     // API endpoint
-    String apiUrl = 'http://localhost:8090/user/login';
+    String apiUrl = 'http://192.168.1.39:8090/user/login';
 
     // Request body
     Map<String, dynamic> requestBody = {

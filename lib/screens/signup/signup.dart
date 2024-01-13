@@ -16,7 +16,7 @@ class RegisterScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
 
   Future<void> registerUser(BuildContext context) async {
-    var url = Uri.parse('http://localhost:8090/user/register');
+    var url = Uri.parse('http://192.168.1.39:8090/user/register');
     var headers = {'Content-Type': 'application/json'};
     var body = json.encode({
       "name": nameController.text,
