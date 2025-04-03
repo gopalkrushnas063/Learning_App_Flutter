@@ -1,13 +1,23 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learning_app/Utilities/enums.dart';
+import 'package:learning_app/features/Auth/controllers/auth.controller.dart';
+import 'package:learning_app/services/storage_service.dart';
 
-class ProfileSection extends StatelessWidget {
-  const ProfileSection({Key? key});
+class ProfileSection extends ConsumerWidget {
+  const ProfileSection({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     Color baseColor = Color.fromARGB(255, 238, 250, 241);
+    Future<void> logout() async {
+      await ref
+          .read(storageProvider)
+          .delete(key: SecureStorageKeys.LOGIN_TOKEN.name);
+    }
+
     return ClayContainer(
       color: baseColor,
       child: SingleChildScrollView(
@@ -64,18 +74,26 @@ class ProfileSection extends StatelessWidget {
                 subtitle: "FAQ/ Customer Care Connect",
               ),
               SizedBox(height: 12),
-              ClayContainer(
-                width: 340,
-                height: 50,
-                color: baseColor,
-                borderRadius: 30,
-                child: Center(
-                  child: Text(
-                    "Logout",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+              GestureDetector(
+                onTap: () async {
+                  await logout();
+                  ref.invalidate(storageProvider);
+                  ref.invalidate(authControllerProvider);
+                  Navigator.pushNamed(context, '/');
+                },
+                child: ClayContainer(
+                  width: 340,
+                  height: 50,
+                  color: baseColor,
+                  borderRadius: 30,
+                  child: Center(
+                    child: Text(
+                      "Logout",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ),

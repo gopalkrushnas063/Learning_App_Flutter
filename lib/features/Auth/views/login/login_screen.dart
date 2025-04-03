@@ -1,112 +1,70 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learning_app/Utilities/enums.dart';
+import 'package:learning_app/features/Auth/controllers/auth.controller.dart';
+import 'package:learning_app/features/Auth/models/auth_model.dart';
 import 'package:learning_app/features/Onboarding/widgets/components/background.dart';
 import 'package:learning_app/features/Main/views/main_screen.dart';
 import 'package:learning_app/features/Auth/views/signup/signup.dart';
-import 'package:http/http.dart' as http;
+import 'package:learning_app/services/storage_service.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool _isNavigating = false;
 
-  // Function to handle the login process
-  void _login(BuildContext context) async {
-    String enteredUsername = usernameController.text;
-    String enteredPassword = passwordController.text;
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
-    // API endpoint
-    String apiUrl = 'https://testseries-cf9d5dc153b9.herokuapp.com/user/login';
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
 
-    // Request body
-    Map<String, dynamic> requestBody = {
-      'email': enteredUsername,
-      'password': enteredPassword,
-    };
+  void _login() async {
+    final auth = AuthModel(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+    await ref.read(authControllerProvider.notifier).login(auth);
 
-    try {
-      // Sending a POST request
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode(requestBody),
-      );
-
-      if (response.statusCode == 200) {
-        // Successful login
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Login Successful'),
-              content: Text('Welcome, $enteredUsername!'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                    );
-                  },
-                ),
-              ],
-            );
-          },
+    // After login, you can read the stored email
+    final storedEmail = await ref.read(storageProvider).read(
+          key: SecureStorageKeys.LOGIN_TOKEN.name,
         );
-      } else if (response.statusCode == 401) {
-        // User not found or incorrect password
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Login Failed'),
-              content: Text('Username or password is incorrect.'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      } else {
-        // Handle other status codes as needed
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Login Failed'),
-              content: Text('An error occurred. Please try again later.'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } catch (error) {
-      // Handle any exceptions that might occur during the request
-      print('Error during login: $error');
-    }
+    debugPrint('Stored email: $storedEmail');
   }
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final authState = ref.watch(authControllerProvider);
+    final size = MediaQuery.of(context).size;
+
+    // Handle state changes
+    if (authState.state == AuthState.success && !_isNavigating) {
+      _isNavigating = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+        _showSnackBar(authState.message ?? 'Login successful');
+      });
+    } else if (authState.state == AuthState.error) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _showSnackBar(authState.error ?? 'Login failed');
+      });
+    }
 
     return Scaffold(
       body: Background(
@@ -132,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 child: TextField(
-                  controller: usernameController,
+                  controller: emailController,
                   decoration: InputDecoration(
                     labelText: "Username",
                   ),
@@ -166,9 +124,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.centerRight,
                 margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: MaterialButton(
-                  onPressed: () {
-                    _login(context);
-                  },
+                  onPressed:
+                      authState.state == AuthState.loading ? null : _login,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0),
                   ),
@@ -188,13 +145,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     padding: const EdgeInsets.all(0),
-                    child: Text(
-                      "LOGIN",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    child: authState.state == AuthState.loading
+                        ? CircularProgressIndicator(color: Colors.white)
+                        : Text(
+                            "LOGIN",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                   ),
                 ),
               ),
