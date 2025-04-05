@@ -66,7 +66,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
               "Hi Learner",
               style: TextStyle(
                 fontSize: 25,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
               ),
             ),
           ),
@@ -99,6 +100,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         border: InputBorder.none,
                         hintText: hintTexts[hintTextIndex],
                         hintStyle: TextStyle(
+                          fontWeight: FontWeight.w500,
                           color: Colors.black.withOpacity(0.5),
                         ),
                       ),

@@ -32,14 +32,14 @@ class Courses extends StatelessWidget {
             Text(
               "Courses",
               style: TextStyle(
-                fontSize: 23,
+                fontSize: 20,
                 fontWeight: FontWeight.w600,
               ),
             ),
             Text(
               "See All",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 15,
                 fontWeight: FontWeight.w500,
                 color: Colors.lightGreen,
               ),
@@ -48,16 +48,10 @@ class Courses extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Container(
-          child: GridView.builder(
+          child: ListView.builder(
             itemCount: imgList.length,
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: gridItemWidth / gridItemHeight,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-            ),
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
@@ -67,41 +61,62 @@ class Courses extends StatelessWidget {
                         builder: (context) => CourseDetails(imgList[index])),
                   );
                 },
-                child: ClayContainer(
-                  width: gridItemWidth,
-                  height: gridItemHeight,
-                  borderRadius: 20,
-                  color: Color.fromARGB(255, 238, 250, 241),
-                  curveType: CurveType.none,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Image.asset(
-                          "assets/images/${imgList[index]}.png",
-                          width: 100,
-                          height: 100,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 20),
+                  child: ClayContainer(
+                    borderRadius: 20,
+                    color: Color.fromARGB(255, 238, 250, 241),
+                    curveType: CurveType.none,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.all(10),
+                                child: Image.asset(
+                                  "assets/images/${imgList[index]}.png",
+                                  width: 50,
+                                  height: 50,
+                                ),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 10),
+                                  Text(
+                                    courseList[index],
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black.withOpacity(0.6),
+                                    ),
+                                  ),
+                                  SizedBox(height: 5),
+                                  Text(
+                                    '55 Materials',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black.withOpacity(0.5),
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        courseList[index],
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black.withOpacity(0.6),
+                        Padding(
+                          padding: EdgeInsets.only(right: 15),
+                          child: Icon(
+                            Icons.fast_forward,
+                            color: Colors.lightGreen,
+                            size: 22.0,
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        '55 Materials',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               );

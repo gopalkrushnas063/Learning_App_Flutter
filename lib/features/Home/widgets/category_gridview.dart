@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:learning_app/features/Home/widgets/category_page.dart';
 import 'package:learning_app/services/api_services.dart';
 
-
+// ignore: must_be_immutable
 class CategoryGrid extends StatelessWidget {
   final List<String> catNames = [
     'All Exams',
@@ -63,9 +63,9 @@ class CategoryGrid extends StatelessWidget {
               ClayContainer(
                 height: 60,
                 width: 60,
-                borderRadius:50,
-              color: Color.fromARGB(255, 238, 250, 241),
-              curveType: CurveType.concave,
+                borderRadius: 50,
+                color: Color.fromARGB(255, 238, 250, 241),
+                curveType: CurveType.concave,
                 child: Center(
                   child: Icon(
                     catIcons[index],
@@ -80,7 +80,7 @@ class CategoryGrid extends StatelessWidget {
                 maxLines: 2,
                 style: TextStyle(
                   fontSize: 12,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   color: Colors.black.withOpacity(0.7),
                 ),
               ),
@@ -98,7 +98,10 @@ class CategoryGrid extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => CategoryPage(categoryData: fetchedData,categoryName: endpoint,),
+          builder: (context) => CategoryPage(
+            categoryData: fetchedData,
+            categoryName: endpoint,
+          ),
         ),
       );
     } catch (e) {
