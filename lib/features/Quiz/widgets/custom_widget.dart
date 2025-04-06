@@ -23,7 +23,14 @@ class CustomWidget extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.black,
+              color: Colors.lightGreen,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 4,
+                  offset: Offset(0, 2),
+                ),
+              ],
             ),
             padding: const EdgeInsets.all(8),
             child: Icon(
@@ -37,14 +44,15 @@ class CustomWidget extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.gothicA1(
-                  fontSize: 18,
+                style: GoogleFonts.ubuntu(
+                  fontSize: 14,
                   fontWeight: FontWeight.w700,
+                  color: Colors.grey[800],
                 ),
               ),
               Text(
                 subtitle,
-                style: GoogleFonts.gothicA1(fontSize: 16),
+                style: GoogleFonts.ubuntu(fontSize: 14, color: Colors.grey),
               ),
             ],
           ),

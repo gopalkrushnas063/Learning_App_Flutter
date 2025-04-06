@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:learning_app/features/Quiz/exam_details_screen.dart';
-
-
-
-
+import 'package:learning_app/features/Quiz/views/exam_details_screen.dart';
 
 class TestList extends StatelessWidget {
   @override
@@ -14,7 +10,7 @@ class TestList extends StatelessWidget {
         backgroundColor: Colors.lightGreen,
         title: Text(
           'Detail Test',
-          style: GoogleFonts.gothicA1(
+          style: GoogleFonts.ubuntu(
             color: Colors.white,
           ),
         ),
@@ -25,7 +21,7 @@ class TestList extends StatelessWidget {
             padding: const EdgeInsets.only(left: 16.0),
             child: Text(
               "Let's test your knowledge",
-              style: GoogleFonts.gothicA1(
+              style: GoogleFonts.ubuntu(
                 textStyle: Theme.of(context).textTheme.displayLarge,
                 fontSize: 28,
                 fontWeight: FontWeight.w600,
@@ -67,7 +63,11 @@ class TestList extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ExamDetails(),));
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => ExamDetails(),
+                            ),
+                          );
                         },
                         child: ListView.builder(
                           itemCount: 5,
@@ -84,7 +84,8 @@ class TestList extends StatelessWidget {
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.rectangle,
                                     image: DecorationImage(
-                                      image: AssetImage("assets/images/Flutter.png"),
+                                      image: AssetImage(
+                                          "assets/images/Flutter.png"),
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -110,8 +111,7 @@ class TestList extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                trailing: const Icon(Icons
-                                    .favorite_border),
+                                trailing: const Icon(Icons.favorite_border),
                               ),
                             );
                           },

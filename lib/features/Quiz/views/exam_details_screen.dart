@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:learning_app/features/Quiz/bullet_point.dart';
-import 'package:learning_app/features/Quiz/custom_widget.dart';
-
-
+import 'package:learning_app/features/Quiz/widgets/bullet_point.dart';
+import 'package:learning_app/features/Quiz/widgets/custom_widget.dart';
+import 'package:learning_app/features/Quiz/widgets/quiz_screen.dart';
 
 class ExamDetails extends StatelessWidget {
   @override
@@ -11,9 +10,10 @@ class ExamDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
+        centerTitle: false,
         title: Text(
           'Detail Test',
-          style: GoogleFonts.gothicA1(
+          style: GoogleFonts.ubuntu(
             color: Colors.white,
           ),
         ),
@@ -24,7 +24,7 @@ class ExamDetails extends StatelessWidget {
             padding: const EdgeInsets.only(left: 16.0),
             child: Text(
               "SSC/UPSC Exam Details",
-              style: GoogleFonts.gothicA1(
+              style: GoogleFonts.ubuntu(
                 textStyle: Theme.of(context).textTheme.displayLarge,
                 fontSize: 28,
                 fontWeight: FontWeight.w600,
@@ -47,10 +47,10 @@ class ExamDetails extends StatelessWidget {
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 233, 229, 224),
+                  color: Color(0xFFf5fbf5),
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    topRight: Radius.circular(50),
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
                 ),
                 child: Column(
@@ -60,7 +60,6 @@ class ExamDetails extends StatelessWidget {
                       child: Container(
                         width: 50,
                         height: 5,
-                        color: Colors.grey,
                       ),
                     ),
                     Expanded(
@@ -71,12 +70,15 @@ class ExamDetails extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 18.0, top: 14.0),
+                                padding: const EdgeInsets.only(
+                                    left: 18.0, top: 14.0),
                                 child: Text(
                                   "Brief explanation about this test",
-                                  style: GoogleFonts.gothicA1(
-                                      fontSize: 18, fontWeight: FontWeight.w700),
+                                  style: GoogleFonts.ubuntu(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.grey[800],
+                                  ),
                                 ),
                               ),
                               const CustomWidget(
@@ -99,12 +101,15 @@ class ExamDetails extends StatelessWidget {
                                     left: 18.0, top: 14.0, right: 28.0),
                                 child: Text(
                                   "Please read the text below carefully so you can understand it",
-                                  style: GoogleFonts.gothicA1(
-                                      fontSize: 18, fontWeight: FontWeight.w700),
+                                  style: GoogleFonts.ubuntu(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.grey[800]),
                                 ),
                               ),
                               const Padding(
-                                padding: EdgeInsets.only(left: 16.0, right: 28.0),
+                                padding:
+                                    EdgeInsets.only(left: 16.0, right: 28.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -123,26 +128,6 @@ class ExamDetails extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              const SizedBox(height: 120),
-                              Center(
-                                child: Container(
-                                  width: 300,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    color: Colors.lightGreen,
-                                  ),
-                                  child: TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "Start Test",
-                                      style: GoogleFonts.gothicA1(
-                                        color: Colors.white,
-                                        fontSize: 25,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
                             ],
                           ),
                         ),
@@ -153,6 +138,40 @@ class ExamDetails extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 50.0,
+            vertical: MediaQuery.of(context).size.height / 30,
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.lightGreen,
+            ),
+            child: TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const QuizScreen(
+                      totalQuestions: 5,
+                      timePerQuestion: 30,
+                    ),
+                  ),
+                );
+              },
+              child: Text(
+                "Start Test",
+                style: GoogleFonts.ubuntu(
+                  color: Colors.white,
+                  fontSize: 25,
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );

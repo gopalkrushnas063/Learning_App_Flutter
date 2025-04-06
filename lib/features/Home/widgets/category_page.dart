@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learning_app/Utilities/enums.dart';
 import 'package:learning_app/features/Home/controllers/exam_card.controller.dart';
-import 'package:learning_app/features/Quiz/test_list_screen.dart';
+import 'package:learning_app/features/Quiz/widgets/test_list_screen.dart';
 
 class CategoryPage extends ConsumerWidget {
   final String categoryName;

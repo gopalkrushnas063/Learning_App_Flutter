@@ -14,17 +14,17 @@ class BulletPoint extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
-            padding: EdgeInsets.only(top: 6.0, right: 8.0,left: 10.0),
+            padding: EdgeInsets.only(top: 6.0, right: 8.0, left: 10.0),
             child: Icon(
               Icons.circle,
               size: 12,
-              color: Colors.black,
+              color: Colors.lightGreen,
             ),
           ),
           Expanded(
             child: Text(
               text,
-              style: GoogleFonts.gothicA1(fontSize: 16),
+              style: GoogleFonts.ubuntu(fontSize: 16, color: Colors.black54),
               textAlign: TextAlign.justify,
             ),
           ),
@@ -33,4 +33,3 @@ class BulletPoint extends StatelessWidget {
     );
   }
 }
-
