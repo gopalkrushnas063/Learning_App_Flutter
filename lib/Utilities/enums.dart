@@ -8,3 +8,7 @@ enum SecureStorageKeys {
 }
 
 enum BannerState { initial, loading, success, error }
+
+enum ExamCardState { initial, loading, success, error }
+
+enum CategoryState { initial, loading, success, error }
