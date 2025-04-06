@@ -1,16 +1,14 @@
+import 'package:learning_app/Utilities/enums.dart';
 import 'package:learning_app/features/Home/models/banner.dart';
-import 'package:learning_app/services/api_services.dart';
 
 class BannerViewModel {
-  final ApiService _apiService = ApiService();
+  final List<BannerModel> banners;
+  final BannerState state;
+  final String? error;
 
-  Future<List<BannerModel>> getAllBanners() async {
-    try {
-      final List<dynamic> response = await _apiService.fetchAllBanners();
-      print(response);
-      return response.map((banner) => BannerModel.fromJson(banner)).toList();
-    } catch (e) {
-      rethrow;
-    }
-  }
+  BannerViewModel({
+    this.banners = const [],
+    this.state = BannerState.initial,
+    this.error,
+  });
 }

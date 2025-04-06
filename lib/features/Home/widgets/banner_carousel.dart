@@ -1,90 +1,88 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:learning_app/features/Home/models/banner.dart';
-import 'package:learning_app/features/Home/viewmodels/banner_viewmodel.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learning_app/Utilities/enums.dart';
+import 'package:learning_app/features/Home/controllers/banner.controller.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CarouselView extends StatefulWidget {
+class CarouselView extends ConsumerStatefulWidget {
   @override
-  _CarouselViewState createState() => _CarouselViewState();
+  ConsumerState<CarouselView> createState() => _CarouselViewState();
 }
 
-class _CarouselViewState extends State<CarouselView> {
-  late List<BannerModel> _banners = [];
+class _CarouselViewState extends ConsumerState<CarouselView> {
   int _activeIndex = 0;
-  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    _loadBanners();
-  }
-
-  Future<void> _loadBanners() async {
-    try {
-      final viewModel = BannerViewModel();
-      final banners = await viewModel.getAllBanners();
-      setState(() {
-        _banners = banners;
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(bannerControllerProvider.notifier).fetchBanners();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return _isLoading
+    final bannerState = ref.watch(bannerControllerProvider);
+
+    return bannerState.state == BannerState.loading
         ? _buildShimmer()
-        : _banners.isEmpty
-            ? Container() // You can place a fallback widget or empty container here
-            : Column(
-                children: [
-                  CarouselSlider.builder(
-                    itemCount: _banners.length,
-                    itemBuilder: (context, index, realIndex) {
-                      String imageURL = _banners[index].image;
-                      return GestureDetector(
-                        onTap: () async {
-                          // String url = _banners[index].link;
-                          // if (await canLaunch(url)) {
-                          //   await launch(url);
-                          // } else {
-                          //   throw 'Could not launch $url';
-                          // }
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: Image.network(
-                            "$imageURL",
-                            fit: BoxFit.fill,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Text('Failed to load image');
+        : bannerState.state == BannerState.error
+            ? _buildError(bannerState.error)
+            : bannerState.banners.isEmpty
+                ? Container()
+                : Column(
+                    children: [
+                      CarouselSlider.builder(
+                        itemCount: bannerState.banners.length,
+                        itemBuilder: (context, index, realIndex) {
+                          final banner = bannerState.banners[index];
+                          return GestureDetector(
+                            onTap: () {
+                              // Handle banner tap
+                              // if (banner.url.startsWith('/')) {
+                              //   Navigator.pushNamed(context, banner.url);
+                              // } else {
+                              //   launchUrl(Uri.parse(banner.url));
+                              // }
                             },
-                          ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.network(
+                                banner.bannerImage,
+                                fit: BoxFit.fill,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Container(
+                                    color: Colors.grey[200],
+                                    child: Center(
+                                      child: Text(
+                                        banner.title,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                        options: CarouselOptions(
+                          height: MediaQuery.of(context).size.width <= 600 ? 158 : 450,
+                          autoPlay: true,
+                          enlargeCenterPage: true,
+                          enlargeStrategy: CenterPageEnlargeStrategy.height,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              _activeIndex = index;
+                            });
+                          },
                         ),
-                      );
-                    },
-                    options: CarouselOptions(
-                      height: MediaQuery.of(context).size.width <= 600 ? 158 : 450,
-                      autoPlay: true,
-                      enlargeCenterPage: true,
-                      enlargeStrategy: CenterPageEnlargeStrategy.height,
-                      onPageChanged: (index, reason) {
-                        setState(() {
-                          _activeIndex = index;
-                        });
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  buildIndicator(),
-                ],
-              );
+                      ),
+                      const SizedBox(height: 10),
+                      buildIndicator(bannerState.banners.length),
+                    ],
+                  );
   }
 
   Widget _buildShimmer() {
@@ -95,7 +93,7 @@ class _CarouselViewState extends State<CarouselView> {
           highlightColor: Colors.grey[100]!,
           child: Container(
             height: MediaQuery.of(context).size.width <= 600 ? 158 : 450,
-            width: 320,
+            width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
@@ -103,14 +101,29 @@ class _CarouselViewState extends State<CarouselView> {
           ),
         ),
         const SizedBox(height: 10),
-        // You can also render a shimmer effect for the indicator here if needed
       ],
     );
   }
 
-  Widget buildIndicator() => AnimatedSmoothIndicator(
+  Widget _buildError(String? error) {
+    return Container(
+      height: MediaQuery.of(context).size.width <= 600 ? 158 : 450,
+      decoration: BoxDecoration(
+        color: Colors.grey[200],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Center(
+        child: Text(
+          error ?? 'Failed to load banners',
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+
+  Widget buildIndicator(int count) => AnimatedSmoothIndicator(
         activeIndex: _activeIndex,
-        count: _banners.length,
+        count: count,
         effect: const ScaleEffect(
           dotWidth: 7,
           dotHeight: 7,

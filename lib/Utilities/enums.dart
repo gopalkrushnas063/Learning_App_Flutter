@@ -6,3 +6,5 @@ enum SecureStorageKeys {
   CALENDER_ACCESS,
   TOKEN_ONE,
 }
+
+enum BannerState { initial, loading, success, error }
