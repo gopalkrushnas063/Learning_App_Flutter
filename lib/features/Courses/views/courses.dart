@@ -1,8 +1,11 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learning_app/features/Courses/widgets/course_details.dart';
+import 'package:learning_app/theme/light_and_dark_theme.dart';
+import 'package:learning_app/theme/provider/theme_provider.dart';
 
-class Courses extends StatelessWidget {
+class Courses extends ConsumerWidget {
   List imgList = [
     'c_sharp',
     'react_native',
@@ -18,7 +21,9 @@ class Courses extends StatelessWidget {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isDarkMode = ref.watch(themeProvider) == darkTheme;
+
     double gridItemWidth = MediaQuery.of(context).size.width / 2 -
         15; // Adjust the width based on screen size
     double gridItemHeight =
@@ -65,7 +70,9 @@ class Courses extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 20),
                   child: ClayContainer(
                     borderRadius: 20,
-                    color: Color.fromARGB(255, 238, 250, 241),
+                    color: isDarkMode
+                        ? Color(0xFF161616)
+                        : Color.fromARGB(255, 238, 250, 241),
                     curveType: CurveType.none,
                     child: Row(
                       children: [
@@ -89,7 +96,9 @@ class Courses extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.black.withOpacity(0.6),
+                                      color: isDarkMode
+                                          ? Color(0xFFDCDCDC)
+                                          : Colors.black.withOpacity(0.6),
                                     ),
                                   ),
                                   SizedBox(height: 5),
@@ -98,7 +107,9 @@ class Courses extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.black.withOpacity(0.5),
+                                      color: isDarkMode
+                                          ? Color(0xFFDCDCDC)
+                                          : Colors.black.withOpacity(0.5),
                                     ),
                                   ),
                                   SizedBox(height: 10),

@@ -1,13 +1,18 @@
 import 'dart:async';
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learning_app/theme/light_and_dark_theme.dart';
+import 'package:learning_app/theme/provider/theme_provider.dart';
 
-class CustomAppBar extends StatefulWidget {
+class CustomAppBar extends ConsumerStatefulWidget {
+  const CustomAppBar({super.key});
+
   @override
-  _CustomAppBarState createState() => _CustomAppBarState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _CustomAppBarState();
 }
 
-class _CustomAppBarState extends State<CustomAppBar> {
+class _CustomAppBarState extends ConsumerState<CustomAppBar> {
   late final GlobalKey<ScaffoldState> scaffoldKey;
   int hintTextIndex = 0;
   late Timer _timer;
@@ -41,6 +46,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     Color baseColor = Color.fromARGB(255, 238, 250, 241);
+    final isDarkMode = ref.watch(themeProvider) == darkTheme;
 
     return Container(
       padding: EdgeInsets.only(
@@ -48,7 +54,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
         left: 15,
       ),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 238, 250, 241),
+        color:
+            isDarkMode ? Color(0xFF161616) : Color.fromARGB(255, 238, 250, 241),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(20),
           bottomRight: Radius.circular(20),
@@ -67,7 +74,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w500,
-                color: Colors.black,
+                color: isDarkMode ? Color(0xFFDCDCDC) : Colors.black,
               ),
             ),
           ),
@@ -76,7 +83,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             curveType: CurveType.none,
             width: MediaQuery.of(context).size.width,
             height: 55,
-            color: baseColor,
+            color: isDarkMode ? Color(0xFF161616) : baseColor,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Row(
@@ -86,7 +93,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     child: Icon(
                       Icons.search,
                       size: 25,
-                      color: Colors.black.withOpacity(0.5),
+                      color: isDarkMode
+                          ? Color(0xFFDCDCDC)
+                          : Colors.black.withOpacity(0.5),
                     ),
                   ),
                   SizedBox(width: 10),
@@ -101,7 +110,9 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         hintText: hintTexts[hintTextIndex],
                         hintStyle: TextStyle(
                           fontWeight: FontWeight.w500,
-                          color: Colors.black.withOpacity(0.5),
+                          color: isDarkMode
+                              ? Color(0xFFDCDCDC)
+                              : Colors.black.withOpacity(0.5),
                         ),
                       ),
                     ),

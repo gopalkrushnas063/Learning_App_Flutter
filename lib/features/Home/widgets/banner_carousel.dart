@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learning_app/Utilities/enums.dart';
 import 'package:learning_app/features/Home/controllers/banner.controller.dart';
+import 'package:learning_app/theme/light_and_dark_theme.dart';
+import 'package:learning_app/theme/provider/theme_provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -27,7 +29,7 @@ class _CarouselViewState extends ConsumerState<CarouselView> {
     final bannerState = ref.watch(bannerControllerProvider);
 
     return bannerState.state == BannerState.loading
-        ? _buildShimmer()
+        ? _buildShimmer(ref)
         : bannerState.state == BannerState.error
             ? _buildError(bannerState.error)
             : bannerState.banners.isEmpty
@@ -87,19 +89,21 @@ class _CarouselViewState extends ConsumerState<CarouselView> {
                   );
   }
 
-  Widget _buildShimmer() {
+  Widget _buildShimmer(WidgetRef ref) {
+    final theme = ref.watch(themeProvider);
+    final isDarkMode = ref.watch(themeProvider) == darkTheme;
     return Column(
       children: [
         Shimmer.fromColors(
-          baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
+          baseColor: isDarkMode ? Color(0xFF161616) : Colors.grey[300]!,
+          highlightColor: isDarkMode ? Color(0xFF212121) : Colors.grey[100]!,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Container(
               height: MediaQuery.of(context).size.width <= 600 ? 158 : 450,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: isDarkMode ? Color(0xFF161616) : Colors.white,
                 borderRadius: BorderRadius.circular(12),
               ),
             ),

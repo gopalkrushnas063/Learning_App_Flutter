@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learning_app/theme/light_and_dark_theme.dart';
+import 'package:learning_app/theme/provider/theme_provider.dart';
 import 'package:learning_app/widgets/description_section.dart';
 import 'package:learning_app/widgets/material_section.dart';
 
-class CourseDetails extends StatefulWidget {
-  String img;
+class CourseDetails extends ConsumerStatefulWidget {
+  final String img;
   CourseDetails(this.img);
 
   @override
-  State<CourseDetails> createState() => _CourseDetailsState();
+  ConsumerState<CourseDetails> createState() => _CourseDetailsState();
 }
 
-class _CourseDetailsState extends State<CourseDetails> {
+class _CourseDetailsState extends ConsumerState<CourseDetails> {
   bool isVideoSection = true;
+
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = ref.watch(themeProvider) == darkTheme;
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
+        foregroundColor: isDarkMode ? Color(0xFF161616) : Colors.black,
+        backgroundColor: isDarkMode ? Color(0xFF161616) : Colors.white,
         elevation: 0,
         centerTitle: true,
         title: Text(
@@ -48,7 +53,7 @@ class _CourseDetailsState extends State<CourseDetails> {
               height: 200,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Color(0xFFF5F3FF),
+                color: isDarkMode ? Color(0xFF161616) : Color(0xFFF5F3FF),
                 image: DecorationImage(
                     image: AssetImage('assets/images/${widget.img}.png')),
               ),
@@ -56,7 +61,7 @@ class _CourseDetailsState extends State<CourseDetails> {
                 child: Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: isDarkMode ? Color(0xFF161616) : Colors.white,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
@@ -81,7 +86,9 @@ class _CourseDetailsState extends State<CourseDetails> {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
-                color: Colors.black.withOpacity(0.7),
+                color: isDarkMode
+                    ? Color(0xFFDCDCDC)
+                    : Colors.black.withOpacity(0.7),
               ),
             ),
             SizedBox(height: 5),
@@ -90,28 +97,28 @@ class _CourseDetailsState extends State<CourseDetails> {
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w500,
-                color: Colors.black.withOpacity(0.5),
+                color: isDarkMode
+                    ? Color(0xFFDCDCDC)
+                    : Colors.black.withOpacity(0.5),
               ),
             ),
             SizedBox(height: 20),
             Container(
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
               decoration: BoxDecoration(
-                color: Color(0xFFF5F3FF),
+                color: isDarkMode ? Color(0xFF161616) : Color(0xFFF5F3FF),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Material(
-                    // if isVideoSection condition true then that color will be on button and if condition is false then that color wil be shown on button but with some opacity.
                     color: isVideoSection
                         ? Colors.lightGreen
                         : Colors.lightGreen.withOpacity(0.6),
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
                       onTap: () {
-                        //change value of isVideoSection
                         setState(() {
                           isVideoSection = true;
                         });
@@ -136,7 +143,6 @@ class _CourseDetailsState extends State<CourseDetails> {
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
                       onTap: () {
-                        //change value of isVideoSection
                         setState(() {
                           isVideoSection = false;
                         });
@@ -157,8 +163,6 @@ class _CourseDetailsState extends State<CourseDetails> {
                 ],
               ),
             ),
-
-            // Create for both description and video section
             SizedBox(height: 10),
             isVideoSection ? VideoSection() : DescriptionSection(),
           ],

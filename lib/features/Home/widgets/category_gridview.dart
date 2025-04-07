@@ -6,6 +6,8 @@ import 'package:learning_app/features/Home/controllers/category.controller.dart'
 import 'package:learning_app/features/Home/controllers/exam_card.controller.dart';
 import 'package:learning_app/features/Home/models/category_model.dart';
 import 'package:learning_app/features/Home/widgets/category_page.dart';
+import 'package:learning_app/theme/light_and_dark_theme.dart';
+import 'package:learning_app/theme/provider/theme_provider.dart';
 import 'package:shimmer/shimmer.dart'; // Add this import
 
 class CategoryGrid extends ConsumerStatefulWidget {
@@ -28,10 +30,11 @@ class _CategoryGridState extends ConsumerState<CategoryGrid> {
   @override
   Widget build(BuildContext context) {
     final categoryState = ref.watch(categoryControllerProvider);
+    final isDarkMode = ref.watch(themeProvider) == darkTheme;
 
     // Show shimmer while fetching data
     if (categoryState.state == CategoryState.loading) {
-      return _buildShimmerGrid();
+      return _buildShimmerGrid(ref);
     }
 
     // Show error message if API fails
@@ -73,7 +76,9 @@ class _CategoryGridState extends ConsumerState<CategoryGrid> {
                 height: 60,
                 width: 60,
                 borderRadius: 50,
-                color: const Color.fromARGB(255, 238, 250, 241),
+                color: isDarkMode
+                    ? Color(0xFF161616)
+                    : const Color.fromARGB(255, 238, 250, 241),
                 curveType: CurveType.concave,
                 child: Center(
                   child: Icon(
@@ -91,7 +96,9 @@ class _CategoryGridState extends ConsumerState<CategoryGrid> {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
-                  color: Colors.black.withOpacity(0.7),
+                  color: isDarkMode
+                      ? Color(0xFFDCDCDC)
+                      : Colors.black.withOpacity(0.7),
                 ),
               ),
             ],
@@ -101,7 +108,11 @@ class _CategoryGridState extends ConsumerState<CategoryGrid> {
     );
   }
 
-  Widget _buildShimmerGrid() {
+  Widget _buildShimmerGrid(WidgetRef ref) {
+    final isDarkMode = ref.watch(themeProvider) == darkTheme;
+    Color baseColor = isDarkMode
+        ? Color(0xFF161616)
+        : const Color.fromARGB(255, 238, 250, 241);
     return GridView.builder(
       itemCount: 6, // Show 6 shimmer items
       shrinkWrap: true,
@@ -112,15 +123,15 @@ class _CategoryGridState extends ConsumerState<CategoryGrid> {
       ),
       itemBuilder: (context, index) {
         return Shimmer.fromColors(
-          baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
+          baseColor: isDarkMode ? Color(0xFF161616) : Colors.grey[300]!,
+          highlightColor: isDarkMode ? Color(0xFF212121) : Colors.grey[100]!,
           child: Column(
             children: [
               Container(
                 height: 60,
                 width: 60,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: isDarkMode ? Color(0xFF212121) : Colors.white,
                   borderRadius: BorderRadius.circular(50),
                 ),
               ),
@@ -128,7 +139,7 @@ class _CategoryGridState extends ConsumerState<CategoryGrid> {
               Container(
                 width: 50,
                 height: 12,
-                color: Colors.white,
+                color: isDarkMode ? Color(0xFF212121) : Colors.white,
               ),
             ],
           ),

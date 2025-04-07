@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_nav_bar/google_nav_bar.dart'; // Add this import
 import 'package:learning_app/features/Jobs/views/jobs_screen.dart';
 import 'package:learning_app/features/Profile/views/profile_section.dart';
 import 'package:learning_app/features/Courses/widgets/all_courses_page.dart';
 import 'package:learning_app/features/Home/views/home_page_view.dart';
 import 'package:learning_app/features/Wishlist/wish_list_screen.dart';
+import 'package:learning_app/theme/light_and_dark_theme.dart';
+import 'package:learning_app/theme/provider/theme_provider.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key});
+class HomePage extends ConsumerStatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
@@ -26,10 +29,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = ref.watch(themeProvider);
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: Container(
-        color: Colors.white, // Background color of the navigation bar
+        color: theme == darkTheme
+            ? Color(0xFF161616)
+            : Colors.white, // Background color of the navigation bar
         child: Padding(
           padding:
               const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 30),

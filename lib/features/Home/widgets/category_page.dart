@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:learning_app/Utilities/enums.dart';
 import 'package:learning_app/features/Home/controllers/exam_card.controller.dart';
 import 'package:learning_app/features/Quiz/widgets/test_list_screen.dart';
+import 'package:learning_app/theme/light_and_dark_theme.dart';
+import 'package:learning_app/theme/provider/theme_provider.dart';
 
 class CategoryPage extends ConsumerWidget {
   final String categoryName;
@@ -19,10 +21,12 @@ class CategoryPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final baseColor = const Color.fromARGB(255, 238, 250, 241);
+    final isDarkMode = ref.watch(themeProvider) == darkTheme;
 
     // If we have initial data, use it directly
     if (initialData != null) {
-      return _buildScaffold(context, baseColor, initialData!);
+      return _buildScaffold(context, baseColor, initialData!,
+          isDarkMode: isDarkMode);
     }
 
     // Otherwise watch for exam cards state
@@ -42,6 +46,7 @@ class CategoryPage extends ConsumerWidget {
       error: examCardState.state == ExamCardState.error
           ? examCardState.error
           : null,
+      isDarkMode: isDarkMode,
     );
   }
 
@@ -51,18 +56,19 @@ class CategoryPage extends ConsumerWidget {
     List<Map<String, dynamic>> data, {
     bool isLoading = false,
     String? error,
+    bool isDarkMode = false,
   }) {
     return Scaffold(
-      backgroundColor: baseColor,
+      backgroundColor: isDarkMode ? Color(0xFF161616) : baseColor,
       appBar: AppBar(
-        backgroundColor: baseColor,
-        shadowColor: baseColor,
-        foregroundColor: baseColor,
-        surfaceTintColor: baseColor,
+        backgroundColor: isDarkMode ? Color(0xFF161616) : baseColor,
+        shadowColor: isDarkMode ? Color(0xFF161616) : baseColor,
+        foregroundColor: isDarkMode ? Color(0xFF161616) : baseColor,
+        surfaceTintColor: isDarkMode ? Color(0xFF161616) : baseColor,
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios,
-            color: Colors.black,
+            color: isDarkMode ? Color(0xFFDCDCDC) : Colors.black,
           ),
           onPressed: () {
             context.pop();
@@ -70,10 +76,10 @@ class CategoryPage extends ConsumerWidget {
         ),
         title: Text(
           categoryName,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: isDarkMode ? Color(0xFFDCDCDC) : Colors.black,
           ),
         ),
         centerTitle: true,
@@ -84,14 +90,15 @@ class CategoryPage extends ConsumerWidget {
               ? Center(child: Text(error))
               : data.isEmpty
                   ? const Center(child: Text('No data available'))
-                  : _buildContent(baseColor, data),
+                  : _buildContent(baseColor, data, isDarkMode),
     );
   }
 
-  Widget _buildContent(Color baseColor, List<Map<String, dynamic>> data) {
+  Widget _buildContent(
+      Color baseColor, List<Map<String, dynamic>> data, bool isDarkMode) {
     return Container(
       decoration: BoxDecoration(
-        color: baseColor,
+        color: isDarkMode ? Color(0xFF161616) : baseColor,
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       margin: const EdgeInsets.all(8),
@@ -111,7 +118,7 @@ class CategoryPage extends ConsumerWidget {
               },
               child: ClayContainer(
                 borderRadius: 12,
-                color: baseColor,
+                color: isDarkMode ? Color(0xFF161616) : baseColor,
                 height: 80,
                 child: Row(
                   children: [

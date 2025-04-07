@@ -19,9 +19,7 @@ class AllCourseList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: Color.fromARGB(255, 238, 250, 241)
-      ),
+      decoration: BoxDecoration(color: Color.fromARGB(255, 238, 250, 241)),
       child: ListView.builder(
         itemCount: courseList.length,
         itemBuilder: (context, index) {
@@ -45,10 +43,11 @@ class AllCourseList extends StatelessWidget {
                         height: 100,
                       ),
                       SizedBox(width: 20),
-                      Text("${courseList[index]}",style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold
-                      ),)
+                      Text(
+                        "${courseList[index]}",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      )
                     ],
                   ),
                 ),
