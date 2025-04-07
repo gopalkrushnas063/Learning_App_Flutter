@@ -1,6 +1,8 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:learning_app/Utilities/Routes/route_names.dart';
 import 'package:learning_app/features/Auth/views/main_auth_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -95,12 +97,7 @@ class WelcomeScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           child: InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MainAuthScreen(),
-                                ),
-                              );
+                              context.go(RouteNames.mainAuth);
                             },
                             child: ClayContainer(
                               width: 250,

@@ -1,12 +1,10 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:learning_app/Utilities/Routes/routes.dart';
+import 'package:learning_app/Utilities/Routes/app_router.dart';
 import 'package:learning_app/Utilities/enums.dart';
-import 'package:learning_app/features/Main/views/main_screen.dart';
-import 'package:learning_app/features/Onboarding/views/welcome_screen.dart';
 import 'package:learning_app/services/storage_service.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 late String tempPath;
 
@@ -41,8 +39,9 @@ class MyApp extends ConsumerWidget {
 
         // If user is logged in (has email in storage), go to HomePage
         final isLoggedIn = snapshot.hasData && snapshot.data!.isNotEmpty;
+        final appRouter = AppRouter(isLoggedIn);
         
-        return MaterialApp(
+        return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
@@ -50,9 +49,7 @@ class MyApp extends ConsumerWidget {
             ),
             useMaterial3: true,
           ),
-          initialRoute: '/',
-          onGenerateRoute: RouteGenerator.generateRoute,
-          home: isLoggedIn ? const HomePage() : WelcomeScreen(),
+          routerConfig: appRouter.router,
         );
       },
     );
