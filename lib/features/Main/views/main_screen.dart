@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart'; // Add this import
 import 'package:learning_app/features/Profile/views/profile_section.dart';
 import 'package:learning_app/features/Courses/widgets/all_courses_page.dart';
 import 'package:learning_app/features/Home/views/home_page_view.dart';
 import 'package:learning_app/features/Wishlist/wish_list_screen.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -26,56 +26,50 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currentIndex],
-      bottomNavigationBar: ConvexAppBar(
-        backgroundColor: Colors.lightGreen,
-        items: [
-          TabItem(icon: Icons.home, title: 'Home'),
-          TabItem(icon: Icons.assignment, title: 'Courses'),
-          TabItem(icon: Icons.favorite, title: 'Wishlist'),
-          TabItem(icon: Icons.person, title: 'Account'),
-        ],
-        onTap: (int index) {
-          // Implement your logic here based on the tapped index
-          setState(() {
-            _currentIndex =
-                index; // Assuming _currentIndex is a variable in your State
-          });
-
-          // You can add additional logic here based on the tapped index
-          switch (index) {
-            case 0:
-              // Logic for Home tab
-              break;
-            case 1:
-              // Logic for Discovery tab
-              break;
-            case 2:
-              // Logic for Add tab
-              break;
-            // Add more cases for additional tabs if needed
-          }
-        },
-        initialActiveIndex: _currentIndex, // Set initial active index
+      bottomNavigationBar: Container(
+        color: Colors.white, // Background color of the navigation bar
+        child: Padding(
+          padding:
+              const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 30),
+          child: GNav(
+            rippleColor: Colors.grey[300]!, // Ripple effect color
+            hoverColor: Colors.grey[100]!, // Hover effect color
+            gap: 8, // Gap between icon and text
+            activeColor: Colors.lightGreen, // Active icon/text color
+            iconSize: 24, // Icon size
+            padding: EdgeInsets.symmetric(
+                horizontal: 20, vertical: 12), // Button padding
+            duration: Duration(milliseconds: 400), // Animation duration
+            tabBackgroundColor:
+                Colors.lightGreen.withOpacity(0.1), // Active tab background
+            color: Colors.grey[600], // Inactive icon/text color
+            tabs: [
+              GButton(
+                icon: Icons.home,
+                text: 'Home',
+              ),
+              GButton(
+                icon: Icons.assignment,
+                text: 'Courses',
+              ),
+              GButton(
+                icon: Icons.favorite,
+                text: 'Wishlist',
+              ),
+              GButton(
+                icon: Icons.person,
+                text: 'Account',
+              ),
+            ],
+            selectedIndex: _currentIndex,
+            onTabChange: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+          ),
+        ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: _currentIndex,
-      //   onTap: (int index) {
-      //     setState(() {
-      //       _currentIndex = index;
-      //     });
-      //   },
-      //   showUnselectedLabels: true,
-      //   iconSize: 32,
-      //   selectedItemColor: Colors.lightGreen,
-      //   selectedFontSize: 18,
-      //   unselectedItemColor: Colors.grey,
-      //   items: [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.assignment), label: 'Courses'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Wishlist'),
-      //     BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
-      //   ],
-      // ),
     );
   }
 }

@@ -6,6 +6,7 @@ import 'package:learning_app/features/Home/controllers/category.controller.dart'
 import 'package:learning_app/features/Home/controllers/exam_card.controller.dart';
 import 'package:learning_app/features/Home/models/category_model.dart';
 import 'package:learning_app/features/Home/widgets/category_page.dart';
+import 'package:shimmer/shimmer.dart'; // Add this import
 
 class CategoryGrid extends ConsumerStatefulWidget {
   const CategoryGrid({super.key});
@@ -28,9 +29,9 @@ class _CategoryGridState extends ConsumerState<CategoryGrid> {
   Widget build(BuildContext context) {
     final categoryState = ref.watch(categoryControllerProvider);
 
-    // Show loading indicator while fetching data
+    // Show shimmer while fetching data
     if (categoryState.state == CategoryState.loading) {
-      return const Center(child: CircularProgressIndicator());
+      return _buildShimmerGrid();
     }
 
     // Show error message if API fails
@@ -100,23 +101,72 @@ class _CategoryGridState extends ConsumerState<CategoryGrid> {
     );
   }
 
+  Widget _buildShimmerGrid() {
+    return GridView.builder(
+      itemCount: 6, // Show 6 shimmer items
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        childAspectRatio: 1.1,
+      ),
+      itemBuilder: (context, index) {
+        return Shimmer.fromColors(
+          baseColor: Colors.grey[300]!,
+          highlightColor: Colors.grey[100]!,
+          child: Column(
+            children: [
+              Container(
+                height: 60,
+                width: 60,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                width: 50,
+                height: 12,
+                color: Colors.white,
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> _handleCategoryTap(
       BuildContext context, WidgetRef ref, CategoryModel category) async {
     if (category.catNames == 'All Exams') {
-      // Show loading dialog
+      // Show shimmer loading dialog
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (context) => const Center(child: CircularProgressIndicator()),
+        builder: (context) => Center(
+          child: Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+              ),
+            ),
+          ),
+        ),
       );
 
       try {
         // Fetch exam cards
         await ref.read(examCardControllerProvider.notifier).fetchExamCards();
-        
+
         // Close loading dialog
         if (context.mounted) Navigator.of(context).pop();
-        
+
         // Navigate to CategoryPage
         if (context.mounted) {
           Navigator.push(
@@ -131,11 +181,12 @@ class _CategoryGridState extends ConsumerState<CategoryGrid> {
       } catch (e) {
         // Close loading dialog
         if (context.mounted) Navigator.of(context).pop();
-        
+
         // Show error message
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Failed to load exam cards: ${e.toString()}')),
+            SnackBar(
+                content: Text('Failed to load exam cards: ${e.toString()}')),
           );
         }
       }

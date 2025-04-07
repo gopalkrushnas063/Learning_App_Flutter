@@ -68,7 +68,9 @@ class _CarouselViewState extends ConsumerState<CarouselView> {
                           );
                         },
                         options: CarouselOptions(
-                          height: MediaQuery.of(context).size.width <= 600 ? 158 : 450,
+                          height: MediaQuery.of(context).size.width <= 600
+                              ? 158
+                              : 450,
                           autoPlay: true,
                           enlargeCenterPage: true,
                           enlargeStrategy: CenterPageEnlargeStrategy.height,
@@ -91,12 +93,15 @@ class _CarouselViewState extends ConsumerState<CarouselView> {
         Shimmer.fromColors(
           baseColor: Colors.grey[300]!,
           highlightColor: Colors.grey[100]!,
-          child: Container(
-            height: MediaQuery.of(context).size.width <= 600 ? 158 : 450,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Container(
+              height: MediaQuery.of(context).size.width <= 600 ? 158 : 450,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
           ),
         ),

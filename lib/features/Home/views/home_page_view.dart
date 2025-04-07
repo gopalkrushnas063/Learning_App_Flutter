@@ -13,6 +13,7 @@ class HomePageSection extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 238, 250, 241),
       appBar: AppBar(
+        centerTitle: true,
         toolbarHeight: 130,
         backgroundColor: Color.fromARGB(255, 238, 250, 241),
         shadowColor: Color.fromARGB(255, 238, 250, 241),
