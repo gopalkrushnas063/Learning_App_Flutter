@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart'; // Add this import
+import 'package:learning_app/features/Jobs/views/jobs_screen.dart';
 import 'package:learning_app/features/Profile/views/profile_section.dart';
 import 'package:learning_app/features/Courses/widgets/all_courses_page.dart';
 import 'package:learning_app/features/Home/views/home_page_view.dart';
@@ -17,8 +18,9 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _pages = [
     HomePageSection(),
-    AllCourseList(),
-    WishList(),
+    JobsScreen(),
+    // AllCourseList(),
+    // WishList(),
     ProfileSection(),
   ];
 
@@ -49,13 +51,17 @@ class _HomePageState extends State<HomePage> {
                 text: 'Home',
               ),
               GButton(
-                icon: Icons.assignment,
-                text: 'Courses',
+                icon: Icons.work,
+                text: 'Jobs',
               ),
-              GButton(
-                icon: Icons.favorite,
-                text: 'Wishlist',
-              ),
+              // GButton(
+              //   icon: Icons.assignment,
+              //   text: 'Courses',
+              // ),
+              // GButton(
+              //   icon: Icons.favorite,
+              //   text: 'Wishlist',
+              // ),
               GButton(
                 icon: Icons.person,
                 text: 'Account',

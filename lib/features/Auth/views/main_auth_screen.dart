@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:learning_app/Utilities/Routes/route_names.dart';
 import 'package:learning_app/features/Onboarding/widgets/components/background.dart';
 import 'package:learning_app/features/Auth/views/login/login_screen.dart';
 import 'package:learning_app/features/Auth/views/signup/signup.dart';
@@ -26,12 +28,7 @@ class MainAuthScreen extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: MaterialButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LoginScreen(),
-                    ),
-                  );
+                  context.go(RouteNames.login);
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0)),

@@ -1,6 +1,7 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:learning_app/Utilities/enums.dart';
 import 'package:learning_app/features/Home/controllers/exam_card.controller.dart';
 import 'package:learning_app/features/Quiz/widgets/test_list_screen.dart';
@@ -21,13 +22,14 @@ class CategoryPage extends ConsumerWidget {
 
     // If we have initial data, use it directly
     if (initialData != null) {
-      return _buildScaffold(baseColor, initialData!);
+      return _buildScaffold(context, baseColor, initialData!);
     }
 
     // Otherwise watch for exam cards state
     final examCardState = ref.watch(examCardControllerProvider);
 
     return _buildScaffold(
+      context,
       baseColor,
       examCardState.examCards
           .map((card) => {
@@ -44,6 +46,7 @@ class CategoryPage extends ConsumerWidget {
   }
 
   Widget _buildScaffold(
+    BuildContext context,
     Color baseColor,
     List<Map<String, dynamic>> data, {
     bool isLoading = false,
@@ -53,7 +56,27 @@ class CategoryPage extends ConsumerWidget {
       backgroundColor: baseColor,
       appBar: AppBar(
         backgroundColor: baseColor,
-        title: Text(categoryName),
+        shadowColor: baseColor,
+        foregroundColor: baseColor,
+        surfaceTintColor: baseColor,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            context.pop();
+          },
+        ),
+        title: Text(
+          categoryName,
+          style: const TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        centerTitle: true,
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -67,8 +90,8 @@ class CategoryPage extends ConsumerWidget {
 
   Widget _buildContent(Color baseColor, List<Map<String, dynamic>> data) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: baseColor,
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       margin: const EdgeInsets.all(8),

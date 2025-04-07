@@ -1,6 +1,7 @@
 // lib/Utilities/Routes/app_router.dart
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:learning_app/features/Auth/views/login/login_screen.dart';
 import 'package:learning_app/features/Auth/views/main_auth_screen.dart';
 import 'package:learning_app/features/Main/views/main_screen.dart';
 import 'package:learning_app/features/Onboarding/views/welcome_screen.dart';
@@ -27,14 +28,14 @@ class AppRouter {
         path: '/course',
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
-          child:  AllCourseList(),
+          child: AllCourseList(),
         ),
       ),
       GoRoute(
         path: '/wishlist',
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
-          child:  WishList(),
+          child: WishList(),
         ),
       ),
       GoRoute(
@@ -49,6 +50,21 @@ class AppRouter {
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
           child: MainAuthScreen(),
+        ),
+      ),
+      GoRoute(
+        path: '/login',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: LoginScreen(),
+        ),
+      ),
+      //HomePage
+      GoRoute(
+        path: '/home',
+        pageBuilder: (context, state) => MaterialPage(
+          key: state.pageKey,
+          child: HomePage(),
         ),
       ),
     ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:learning_app/Utilities/Routes/route_names.dart';
 import 'package:learning_app/Utilities/enums.dart';
 import 'package:learning_app/features/Auth/controllers/auth.controller.dart';
 import 'package:learning_app/features/Auth/models/auth_model.dart';
@@ -54,10 +56,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     if (authState.state == AuthState.success && !_isNavigating) {
       _isNavigating = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-        );
+        context.go(RouteNames.homeScreen);
         _showSnackBar(authState.message ?? 'Login successful');
       });
     } else if (authState.state == AuthState.error) {

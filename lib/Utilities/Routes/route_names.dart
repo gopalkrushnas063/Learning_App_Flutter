@@ -5,4 +5,6 @@ class RouteNames {
   static const wishlist = '/wishlist';
   static const account = '/account';
   static const mainAuth = '/main_auth';
+  static const login = '/login';
+  static const homeScreen = '/home';
 }

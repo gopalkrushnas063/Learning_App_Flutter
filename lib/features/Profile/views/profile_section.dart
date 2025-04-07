@@ -2,6 +2,8 @@ import 'package:clay_containers/clay_containers.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:learning_app/Utilities/Routes/route_names.dart';
 import 'package:learning_app/Utilities/enums.dart';
 import 'package:learning_app/features/Auth/controllers/auth.controller.dart';
 import 'package:learning_app/services/storage_service.dart';
@@ -95,7 +97,7 @@ class ProfileSection extends ConsumerWidget {
                     await logout();
                     ref.invalidate(storageProvider);
                     ref.invalidate(authControllerProvider);
-                    Navigator.pushNamed(context, '/');
+                    context.go('/');
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
