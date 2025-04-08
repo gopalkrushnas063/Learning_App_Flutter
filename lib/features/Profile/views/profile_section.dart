@@ -104,8 +104,9 @@ class ProfileSection extends ConsumerWidget {
                 // ),
 
                 _buildDarkModeSwitch(
-                  icon: Icons.settings,
-                  title: "Settings",
+                  icon: Icons.contrast,
+                  title: "Dark Mode",
+                  subtitle: "Change app theme",
                   isDarkMode: isDarkMode,
                   ref: ref,
                 ),
@@ -218,6 +219,7 @@ class ProfileSection extends ConsumerWidget {
   Widget _buildDarkModeSwitch({
     required IconData icon,
     required String title,
+    required String subtitle,
     required bool isDarkMode,
     required WidgetRef ref,
   }) {
@@ -256,6 +258,14 @@ class ProfileSection extends ConsumerWidget {
                       color: isDarkMode ? Color(0xFFDCDCDC) : Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      color: isDarkMode ? Color(0xFFDCDCDC) : Colors.black,
+                      fontSize: 11,
                     ),
                   ),
                 ],

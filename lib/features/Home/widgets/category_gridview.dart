@@ -148,28 +148,45 @@ class _CategoryGridState extends ConsumerState<CategoryGrid> {
     );
   }
 
+  void showLoadingDialog(BuildContext context) {
+    // Create an AnimationController
+    final AnimationController controller = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: Navigator.of(context), // This takes care of the ticker provider
+    )..repeat(); // Makes the animation loop indefinitely
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => Center(
+        child: Container(
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: RotationTransition(
+            turns: controller,
+            child: const Icon(
+              Icons.refresh,
+              size: 30,
+              color: Colors.green,
+            ),
+          ),
+        ),
+      ),
+    ).then((_) {
+      // Dispose the controller when the dialog is dismissed
+      controller.dispose();
+    });
+  }
+
   Future<void> _handleCategoryTap(
       BuildContext context, WidgetRef ref, CategoryModel category) async {
     if (category.catNames == 'All Exams') {
       // Show shimmer loading dialog
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) => Center(
-          child: Shimmer.fromColors(
-            baseColor: Colors.grey[300]!,
-            highlightColor: Colors.grey[100]!,
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-              ),
-            ),
-          ),
-        ),
-      );
+      showLoadingDialog(context);
 
       try {
         // Fetch exam cards

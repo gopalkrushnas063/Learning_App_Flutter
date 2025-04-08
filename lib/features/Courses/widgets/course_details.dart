@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:learning_app/theme/light_and_dark_theme.dart';
 import 'package:learning_app/theme/provider/theme_provider.dart';
 import 'package:learning_app/widgets/description_section.dart';
@@ -31,6 +32,15 @@ class _CourseDetailsState extends ConsumerState<CourseDetails> {
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
           ),
+        ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: isDarkMode ? Color(0xFFDCDCDC) : Colors.black,
+          ),
+          onPressed: () {
+            context.pop();
+          },
         ),
         actions: [
           Padding(
